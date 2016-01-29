@@ -60,14 +60,14 @@ function handleError(res, statusCode) {
 
 // Gets a list of Things
 export function index(req, res) {
-  Thing.findAll()
+  return Thing.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a single Thing from the DB
 export function show(req, res) {
-  Thing.find({
+  return Thing.find({
     where: {
       _id: req.params.id
     }
@@ -79,7 +79,7 @@ export function show(req, res) {
 
 // Creates a new Thing in the DB
 export function create(req, res) {
-  Thing.create(req.body)
+  return Thing.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
@@ -89,7 +89,8 @@ export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Thing.find({
+  
+  return Thing.find({
     where: {
       _id: req.params.id
     }
@@ -102,7 +103,7 @@ export function update(req, res) {
 
 // Deletes a Thing from the DB
 export function destroy(req, res) {
-  Thing.find({
+  return Thing.find({
     where: {
       _id: req.params.id
     }
