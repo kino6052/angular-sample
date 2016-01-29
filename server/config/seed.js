@@ -13,7 +13,7 @@ Thing.sync()
     return Thing.destroy({ where: {} });
   })
   .then(() => {
-    Thing.bulkCreate([{
+    return Thing.bulkCreate([{
       name: 'Development Tools',
       info: 'Integration with popular tools such as Bower, Grunt, Babel, Karma, ' +
              'Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, ' +
@@ -46,7 +46,7 @@ Thing.sync()
 User.sync()
   .then(() => User.destroy({ where: {} }))
   .then(() => {
-    User.bulkCreate([{
+    return User.bulkCreate([{
       provider: 'local',
       name: 'Test User',
       email: 'test@example.com',

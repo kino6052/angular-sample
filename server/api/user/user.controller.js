@@ -24,7 +24,7 @@ function handleError(res, statusCode) {
  * restriction: 'admin'
  */
 export function index(req, res) {
-  User.findAll({
+  return User.findAll({
     attributes: [
       '_id',
       'name',
