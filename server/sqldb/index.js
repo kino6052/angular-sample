@@ -14,6 +14,7 @@ var db = {
 };
 
 // Insert models below
+db.CallTicket = db.sequelize.import('../api/call-ticket/call-ticket.model');
 db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
 

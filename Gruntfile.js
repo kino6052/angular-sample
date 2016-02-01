@@ -29,6 +29,16 @@ module.exports = function (grunt) {
 
     // Project settings
     pkg: grunt.file.readJSON('package.json'),
+    gitInitAndDeploy: {
+        dist: {
+            options: {
+                repository: 'dokku@10.10.7.81:dash',
+                message: 'deployment for v.' + process.env.BUILD_NUMBER + '-' + process.env.ENVIRONMENT,
+                branch: 'master' // optional: default is 'master'
+            },
+            src: 'dist'
+        }
+    },
     yeoman: {
       // configurable paths
       client: require('./bower.json').appPath || 'client',
@@ -839,6 +849,10 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin'
+  ]);
+
+  grunt.registerTask('dokku', [
+    'gitInitAndDeploy'
   ]);
 
   grunt.registerTask('default', [
