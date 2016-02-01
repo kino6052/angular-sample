@@ -2,7 +2,7 @@
 
 angular.module('oxhnApp')
   .controller('CallTrackerCtrl', function ($scope, $http) {
-      
+    $scope.users = [];
     // Model
     $scope.user = {
         callType: 'Change',
@@ -18,6 +18,18 @@ angular.module('oxhnApp')
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
                 console.log(data);
+            },
+            function(error){
+                console.log(error);
+            }
+        );
+    };
+    
+    // Save User
+    $scope.getData = function() {
+        $http.get('/api/call-tickets').then(
+            function(response){
+                $scope.users = response.data;
             },
             function(error){
                 console.log(error);
