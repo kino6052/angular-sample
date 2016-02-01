@@ -1,0 +1,44 @@
+div.container-fluid
+    h1 Call Tracker
+    form(name="userForm" novalidate)
+        
+        div.form-group(show-errors)
+            label.control-label First Name
+            input(type="text",class="form-control", name="firstName", ng-model="user.firstName" required placeholder="First Name")
+            p.help-block(ng-if="userForm.firstName.$error.required") The user's name is required
+        
+        div.form-group(show-errors)
+            label.control-label Last Name
+            input(type="text",class="form-control", name="lastName", ng-model="user.lastName" required placeholder="Last Name")
+            p.help-block(ng-if="userForm.lastName.$error.required") The user's name is required
+            
+        div.form.group(show-errors)
+            label.control-label Phone
+            input.form-control.input-phone(type='text', name='phone', phone-input, ng-model="phoneVal", placeholder="Phone")
+            p.help-block(ng-if="userForm.email.$error.required") The user's email is required
+        br
+        
+        div.form.group(show-errors)
+            label.control-label How Can We Help?
+            br
+            div.btn-group
+                label.btn.btn-success(ng-model="help", uib-btn-radio="'Change'") Change
+                label.btn.btn-success(ng-model="help", uib-btn-radio="'Cancel'") Cancel
+                label.btn.btn-success(ng-model="help", uib-btn-radio="'Other'") Other
+        br
+        
+        div.form.group(show-errors)
+            label.control-label What was the Result of the Call?
+            br
+            div.btn-group
+                label.btn.btn-success(ng-model="outcome", uib-btn-radio="'Scheduled'") Scheduled
+                label.btn.btn-success(ng-model="outcome", uib-btn-radio="'Followup'") Follow-up
+                label.btn.btn-success(ng-model="outcome", uib-btn-radio="'Insurance'") Insurance not Accepted
+        br
+        
+        div.form.group(show-errors)
+            label.control-label Additional Notes
+            textarea.form-control(rows="5",id="comment")
+        br
+        
+        button.btn.btn-primary(ng-click="save()") Submit
