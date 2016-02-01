@@ -13,15 +13,15 @@ export default function(sequelize, DataTypes) {
       allowNull: false
     },
     firstName: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     lastName: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     phoneNumber: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     callType: {
@@ -29,15 +29,15 @@ export default function(sequelize, DataTypes) {
       values: ['Change', 'Cancel', 'Billing', 'Other'],
       allowNull: false
     },
-    callType-Other: DataTypes.STRING,
+    callTypeOther: DataTypes.STRING,
     outcome: {
-      type: DataTypes.ENUM
+      type: DataTypes.ENUM,
       values: ['Scheduled', 'Follow-Up', 'Insurance-Issue'],
       allowNull: false
     },
     ocFollowUp: DataTypes.DATE,
     notes: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
   });
