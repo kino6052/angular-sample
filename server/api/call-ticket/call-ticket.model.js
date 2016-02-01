@@ -9,19 +9,19 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
     callInitiated: {
-      type: DateType.DATE,
+      type: DataTypes.DATE,
       allowNull: false
     },
     firstName: {
-      type: DateType.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     lastName: {
-      type: DateType.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     phoneNumber: {
-      type: DateType.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     callType: {
@@ -29,15 +29,15 @@ export default function(sequelize, DataTypes) {
       values: ['Change', 'Cancel', 'Billing', 'Other'],
       allowNull: false
     },
-    callType-Other: DataType.STRING,
+    callTypeOther: DataTypes.STRING,
     outcome: {
-      type: DataTypes.ENUM
+      type: DataTypes.ENUM,
       values: ['Scheduled', 'Follow-Up', 'Insurance-Issue'],
       allowNull: false
     },
     ocFollowUp: DataTypes.DATE,
     notes: {
-      type: DateType.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
   });

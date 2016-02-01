@@ -431,6 +431,12 @@ module.exports = function (grunt) {
           branch: 'master'
         }
       },
+      dokku: {
+        options: {
+          remote: 'dokku',
+          branch: 'master'
+        }
+      },
       openshift: {
         options: {
           remote: 'openshift',
