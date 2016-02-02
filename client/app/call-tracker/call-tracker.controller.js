@@ -11,11 +11,17 @@ angular.module('oxhnApp')
         callInitiated: new Date().toUTCString()
     };
     
+    var followupDate = new Date();
+    
     // Save User
     $scope.save = function() {
         $scope.$broadcast('show-errors-check-validity');
         if ($scope.userForm.$invalid) { return; }
-        
+        if ($scope.user.ocFollowUp){
+            followupDate.setDate(followupDate.getUTCDay() + $scope.user.ocFollowUp);
+            $scope.user.ocFollowUp = followupDate.toUTCString();
+            console.log()
+        }
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
                 console.log(data);

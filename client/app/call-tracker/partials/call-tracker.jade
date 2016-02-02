@@ -69,21 +69,21 @@ html
           |       
           #dropdownMenu2.dropdown(ng-if="user.outcome==='Followup'")
             button.btn.btn-default(data-toggle='dropdown')
-              span#dropdown_title2 {{user.followup}}
+              span#dropdown_title2 {{user.ocFollowUp}}
               |             
               span.caret
             |         
             ul.dropdown-menu
               li
-                input(type='radio', href='#', ng-model='user.followup', value='2 Days')
+                input(type='radio', href='#', ng-model='user.ocFollowUp', value='2')
                 | 2 Days
               |             
               li
-                input(type='radio', href='#', ng-model='user.followup', value='5 Days')
+                input(type='radio', href='#', ng-model='user.ocFollowUp', value='5')
                 | 5 Days
               |             
               li
-                input(type='radio', href='#', ng-model='user.followup', value='7 Days')
+                input(type='radio', href='#', ng-model='user.ocFollowUp', value='7')
                 | 7 Days
           |     
           textarea.form-control(rows='5', ng-if="user.outcome==='Insurance'", ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required='')
