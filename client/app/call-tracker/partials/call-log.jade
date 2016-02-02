@@ -1,0 +1,49 @@
+html
+  body
+    .container-fluid(ng-init='getData()')
+      h1 Call Log
+      table.table
+        thead
+          tr
+            th id
+          
+            th Call Initiated
+          
+            th First Name
+          
+            th Last Name
+          
+            th Phone Number
+          
+            th Call Type
+          
+            th Call Type (Other)
+          
+            th Outcome
+          
+            th Notes
+          
+            th
+        |       
+        tbody
+          tr(ng-repeat='ticket in users')
+            td {{ticket._id}}
+          
+            td {{ticket.callInitiated}}
+          
+            td {{ticket.firstName}}
+          
+            td {{ticket.lastName}}
+          
+            td {{ticket.phoneNumber}}
+          
+            td {{ticket.callType}}
+          
+            td {{ticket.callTypeOther}}
+          
+            td {{ticket.outcome}}
+          
+            td {{ticket.notes}}
+          
+            td
+              button.btn(ng-click='remove(ticket._id)') Delete

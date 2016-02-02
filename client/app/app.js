@@ -23,7 +23,7 @@ angular.module('oxhnApp', [
     $stateProvider
     .state('call', {
       url: "/call-tracker",
-      templateUrl: "app/main/main.html",
+      templateUrl: "components/dashboard/dashboard.html",
       controller: "MainController"
     })
     .state('call.questionaire', {

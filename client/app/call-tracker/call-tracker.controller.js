@@ -37,4 +37,17 @@ angular.module('oxhnApp')
             }
         );
     };
+    
+    // Delete User
+    $scope.remove = function(id) {
+        $http.delete('/api/call-tickets/' + id).then(
+            function(response){
+                console.log(response);
+                $scope.getData();
+            },
+            function(error){
+                console.log(error);
+            }
+        );
+    };
   });
