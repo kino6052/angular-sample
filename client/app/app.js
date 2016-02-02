@@ -28,12 +28,12 @@ angular.module('oxhnApp', [
     })
     .state('call.questionaire', {
       url: "/questionaire",
-      templateUrl: "app/call-tracker/call-tracker-partial.html",
+      templateUrl: "app/call-tracker/partials/call-tracker.html",
       controller: "CallTrackerCtrl"
     })
     .state('call.call-log', {
       url: "/call-log",
-      templateUrl: "app/call-tracker/call-tracker.html",
+      templateUrl: "app/call-tracker/partials/call-log.html",
       controller: "CallTrackerCtrl"
     })
     ;
