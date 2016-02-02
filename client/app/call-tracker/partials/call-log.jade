@@ -2,6 +2,11 @@ html
   body
     .container-fluid(ng-init='getData()')
       h1 Call Log
+      div.row
+        div.col-xs-4
+            div.form-group
+                label.control-label Search
+                input.form-control(ng-model="query" placeholder="Search")  
       table.table
         thead
           tr
@@ -18,6 +23,8 @@ html
             th Call Type
           
             th Call Type (Other)
+            
+            th Followup
           
             th Outcome
           
@@ -26,7 +33,7 @@ html
             th
         |       
         tbody
-          tr(ng-repeat='ticket in users')
+          tr(ng-repeat='ticket in users|filter:query')
             td {{ticket._id}}
           
             td {{ticket.callInitiated}}
@@ -40,6 +47,8 @@ html
             td {{ticket.callType}}
           
             td {{ticket.callTypeOther}}
+            
+            td {{ticket.ocFollowUp}}
           
             td {{ticket.outcome}}
           
