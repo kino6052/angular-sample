@@ -2,11 +2,6 @@ div.container-fluid
     h1 Call Tracker
     form(name="userForm" novalidate)
         div.form-group(show-errors)
-            label.control-label Call Started at
-            input(type="datetime-local",class="form-control", name="callInitiated", ng-model="user.callInitiated" required)
-            p.help-block(ng-if="userForm.callInitiated.$error.required") The call initiation time is required
-            
-        div.form-group(show-errors)
             label.control-label First Name
             input(type="text",class="form-control", name="firstName", ng-model="user.firstName" required, placeholder="First Name")
             p.help-block(ng-if="userForm.firstName.$error.required") The user's name is required

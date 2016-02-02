@@ -1,0 +1,101 @@
+html
+  body
+    .container-fluid
+      h1 Call Tracker
+      |   
+      form(name='userForm', novalidate='')
+        .form-group(show-errors='show-errors')
+          label.control-label First Name
+          |       
+          input.form-control(type='text', name='firstName', ng-model='user.firstName', required='', placeholder='First Name')
+          |       
+          p.help-block(ng-if='userForm.firstName.$error.required') The user&apos;s name is required
+        |     
+        .form-group(show-errors='show-errors')
+          label.control-label Last Name
+          |       
+          input.form-control(type='text', name='lastName', ng-model='user.lastName', required='', placeholder='Last Name')
+          |       
+          p.help-block(ng-if='userForm.lastName.$error.required') The user&apos;s name is required
+        |     
+        .form.group(show-errors='show-errors')
+          label.control-label Phone
+          |       
+          input.form-control.input-phone(type='text', name='phone', phone-input='phone-input', ng-model='user.phoneNumber', required='', placeholder='Phone')
+          |       
+          p.help-block(ng-if='userForm.phone.$error.required') The user&apos;s phone is required
+        br
+        |     
+        .form.group(show-errors='show-errors')
+          label.control-label How Can We Help?
+          br
+          |       
+          div
+            label.radio-inline
+              input(type='radio', ng-model='user.callType', value='Change')
+              span Change
+            |         
+            label.radio-inline
+              input(type='radio', ng-model='user.callType', value='Cancel')
+              span Cancel
+            |         
+            label.radio-inline
+              input(type='radio', ng-model='user.callType', value='Other')
+              span Other
+          |       
+          br
+          |       
+          textarea.form-control(rows='5', ng-if="user.callType==='Other'", ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required='')
+        br
+        |     
+        .form.group(show-errors='show-errors')
+          label.control-label What was the Result of the Call?
+          br
+          |       
+          div
+            label.radio-inline
+              input(type='radio', ng-model='user.outcome', value='Scheduled')
+              span Scheduled
+            |         
+            label.radio-inline
+              input(type='radio', ng-model='user.outcome', value='Followup')
+              span Follow-up
+            |         
+            label.radio-inline
+              input(type='radio', ng-model='user.outcome', value='Insurance')
+              span Insurance not Accepted
+          |       
+          br
+          |       
+          #dropdownMenu2.dropdown(ng-if="user.outcome==='Followup'")
+            button.btn.btn-default(data-toggle='dropdown')
+              span#dropdown_title2 {{user.followup}}
+              |             
+              span.caret
+            |         
+            ul.dropdown-menu
+              li
+                input(type='radio', href='#', ng-model='user.followup', value='2 Days')
+                | 2 Days
+              |             
+              li
+                input(type='radio', href='#', ng-model='user.followup', value='5 Days')
+                | 5 Days
+              |             
+              li
+                input(type='radio', href='#', ng-model='user.followup', value='7 Days')
+                | 7 Days
+          |     
+          textarea.form-control(rows='5', ng-if="user.outcome==='Insurance'", ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required='')
+        br
+        |     
+        .form.group(show-errors='show-errors')
+          label.control-label Additional Notes
+          |       
+          textarea#comment.form-control(rows='5', ng-model='user.notes', name='notes', required='required', placeholder='Put Your Comments Here...')
+          |       
+          p.help-block(ng-if='userForm.notes.$error.required') The comments are required
+        br
+        |     
+        .button-group
+          button.btn.btn-primary(ng-click='save()') Submit
