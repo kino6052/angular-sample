@@ -1,6 +1,26 @@
 'use strict';
 
 angular.module('oxhnApp')
+.config(function($urlRouterProvider, $locationProvider, $stateProvider) {
+    $urlRouterProvider
+      .otherwise('/');
+    
+    $locationProvider.html5Mode(true);
+    
+    $stateProvider
+    .state('state1', {
+      url: "/state1",
+      templateUrl: "app/main/main.html"
+    })
+    .state('state1.list', {
+      url: "/list",
+      templateUrl: "app/call-tracker/call-tracker-partial.html",
+      controller: function($scope) {
+        $scope.items = ["A", "List", "Of", "Items"];
+      }
+    })
+    ;
+  });
   .controller('CallTrackerCtrl', function ($scope, $http) {
     $scope.users = [];
     // Model
