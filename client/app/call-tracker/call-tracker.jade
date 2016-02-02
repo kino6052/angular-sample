@@ -49,7 +49,7 @@ div.container-fluid
         
         div.form.group(show-errors)
             label.control-label Additional Notes
-            textarea.form-control(rows="5",ng-model="user.notes",id="comment",name="notes" required, placeholder="Put Your Comments Here...")
+            textarea.form-control(rows="5",ng-model="user.notes",id="comment",name="notes" required show-errors, placeholder="Put Your Comments Here...")
             p.help-block(ng-if="userForm.notes.$error.required") The comments are required
         br
         

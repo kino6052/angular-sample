@@ -26,7 +26,7 @@ html
           p.help-block(ng-if='userForm.phone.$error.required') The user&apos;s phone is required
         br
         |     
-        .form.group(show-errors='show-errors')
+        .form.group
           label.control-label How Can We Help?
           br
           |       
@@ -41,11 +41,12 @@ html
             |         
             label.radio-inline
               input(type='radio', ng-model='user.callType', value='Other')
-              span Other
-          |       
+              span Other   
           br
-          |       
-          textarea.form-control(rows='5', ng-if="user.callType==='Other'", ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required='')
+        .form.group(show-errors='show-errors', ng-if="user.callType==='Other'") 
+          label.control-label Other      
+            textarea.form-control(rows='5', ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required)
+            p.help-block(ng-if='userForm.other.$error.required') This field is required
         br
         |     
         .form.group(show-errors='show-errors')
@@ -85,8 +86,10 @@ html
               li
                 input(type='radio', href='#', ng-model='user.ocFollowUp', value='7')
                 | 7 Days
-          |     
-          textarea.form-control(rows='5', ng-if="user.outcome==='Insurance'", ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required='')
+        .form.group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")  
+          label.control-label Insurance Issue    
+            textarea.form-control(rows='5',  ng-model='user.insurance', name='insurance', placeholder='How can we help?', required='')
+            p.help-block(ng-if='userForm.insurance.$error.required') This field is required
         br
         |     
         .form.group(show-errors='show-errors')
