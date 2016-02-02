@@ -25,6 +25,13 @@ angular.module('oxhnApp')
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
                 console.log(data);
+                $scope.user = {
+                    callType: 'Change',
+                    outcome: 'Scheduled',
+                    textarea: '',
+                    callInitiated: new Date().toUTCString()
+                };
+                $scope.$broadcast('show-errors-reset');
             },
             function(error){
                 console.log(error);
