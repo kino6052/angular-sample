@@ -1,104 +1,88 @@
-html
-  body
-    .container-fluid
-      h1 Call Tracker
-      |   
-      form(name='userForm', novalidate='')
+.container-fluid
+    h1 Call Tracker  
+    form(name='userForm', novalidate='')
         .form-group(show-errors='show-errors')
-          label.control-label First Name
-          |       
-          input.form-control(type='text', name='firstName', ng-model='user.firstName', required='', placeholder='First Name')
-          |       
-          p.help-block(ng-if='userForm.firstName.$error.required') The user&apos;s name is required
-        |     
+            label.control-label First Name   
+            input.form-control(type='text', name='firstName', ng-model='user.firstName', required='', placeholder='First Name')      
+            p.help-block(ng-if='userForm.firstName.$error.required') The user&apos;s name is required
+
         .form-group(show-errors='show-errors')
-          label.control-label Last Name
-          |       
-          input.form-control(type='text', name='lastName', ng-model='user.lastName', required='', placeholder='Last Name')
-          |       
-          p.help-block(ng-if='userForm.lastName.$error.required') The user&apos;s name is required
-        |     
+            label.control-label Last Name 
+            input.form-control(type='text', name='lastName', ng-model='user.lastName', required='', placeholder='Last Name')     
+            p.help-block(ng-if='userForm.lastName.$error.required') The user&apos;s name is required
+
         .form.group(show-errors='show-errors')
-          label.control-label Phone
-          |       
-          |<input class="form-control input-phone" type='text' name='phone' phone ng-model='user.phoneNumber' required placeholder='Phone'>
-          |       
-          p.help-block(ng-if='userForm.phone.$error.required') The user&apos;s phone is required
+            label.control-label Phone
+            |<input class="form-control input-phone" type='text' name='phone' phone ng-model='user.phoneNumber' required placeholder='Phone'>
+            p.help-block(ng-if='userForm.phone.$error.required') The user&apos;s phone is required
         br
-        |     
+        
         .form.group
-          label.control-label How Can We Help?
-          br
-          |       
-          div
+            label.control-label How Can We Help?
+            br
+
+            div
             label.radio-inline
-              input(type='radio', ng-model='user.callType', value='Change')
-              span Change
-            |         
+                input(type='radio', ng-model='user.callType', value='Change')
+                span Change
+
             label.radio-inline
-              input(type='radio', ng-model='user.callType', value='Cancel')
-              span Cancel
-            |         
+                input(type='radio', ng-model='user.callType', value='Cancel')
+                span Cancel
+
             label.radio-inline
-              input(type='radio', ng-model='user.callType', value='Other')
-              span Other   
-          br
+                input(type='radio', ng-model='user.callType', value='Other')
+                span Other   
+            br
         .form.group(show-errors='show-errors', ng-if="user.callType==='Other'") 
-          label.control-label Other      
+            label.control-label Other      
             textarea.form-control(rows='5', ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required)
             p.help-block(ng-if='userForm.other.$error.required') This field is required
         br
-        |     
+
         .form.group(show-errors='show-errors')
-          label.control-label What was the Result of the Call?
-          br
-          |       
-          div
+            label.control-label What was the Result of the Call?
+            br
+
+            div
             label.radio-inline
-              input(type='radio', ng-model='user.outcome', value='Scheduled')
-              span Scheduled
-            |         
+                input(type='radio', ng-model='user.outcome', value='Scheduled')
+                span Scheduled
+
             label.radio-inline
-              input(type='radio', ng-model='user.outcome', value='Followup')
-              span Follow-up
-            |         
+                input(type='radio', ng-model='user.outcome', value='Followup')
+                span Follow-up
+
             label.radio-inline
-              input(type='radio', ng-model='user.outcome', value='Insurance')
-              span Insurance not Accepted
-          |       
-          br
-          |       
-          #dropdownMenu2.dropdown(ng-if="user.outcome==='Followup'")
-            button.btn.btn-default(data-toggle='dropdown')
-              span#dropdown_title2 {{user.ocFollowUp}}
-              |             
-              span.caret
-            |         
-            ul.dropdown-menu
-              li
-                input(type='radio', href='#', ng-model='user.ocFollowUp', value='2')
-                | 2 Days
-              |             
-              li
-                input(type='radio', href='#', ng-model='user.ocFollowUp', value='5')
-                | 5 Days
-              |             
-              li
-                input(type='radio', href='#', ng-model='user.ocFollowUp', value='7')
-                | 7 Days
+                input(type='radio', ng-model='user.outcome', value='Insurance')
+                span Insurance not Accepted
+            br
+
+            #dropdownMenu2.dropdown(ng-if="user.outcome==='Followup'")
+                button.btn.btn-default(data-toggle='dropdown')
+                    span#dropdown_title2 {{user.ocFollowUp}}
+                    span.caret
+
+                ul.dropdown-menu
+                    li
+                        input(type='radio', href='#', ng-model='user.ocFollowUp', value='2')
+                        | 2 Days
+                    li
+                        input(type='radio', href='#', ng-model='user.ocFollowUp', value='5')
+                        | 5 Days
+                    li
+                        input(type='radio', href='#', ng-model='user.ocFollowUp', value='7')
+                        | 7 Days
         .form.group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")  
-          label.control-label Insurance Issue    
+            label.control-label Insurance Issue    
             textarea.form-control(rows='5',  ng-model='user.insurance', name='insurance', placeholder='How can we help?', required='')
             p.help-block(ng-if='userForm.insurance.$error.required') This field is required
         br
-        |     
+        
         .form.group(show-errors='show-errors')
-          label.control-label Additional Notes
-          |       
-          textarea#comment.form-control(rows='5', ng-model='user.notes', name='notes', required='required', placeholder='Put Your Comments Here...')
-          |       
-          p.help-block(ng-if='userForm.notes.$error.required') The comments are required
+            label.control-label Additional Notes
+            textarea#comment.form-control(rows='5', ng-model='user.notes', name='notes', required='required', placeholder='Put Your Comments Here...')
+            p.help-block(ng-if='userForm.notes.$error.required') The comments are required
         br
-        |     
-        .button-group
-          button.btn.btn-primary(ng-click='save()') Submit
+    .button-group
+        button.btn.btn-primary(ng-click='save()') Submit
