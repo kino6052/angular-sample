@@ -1,0 +1,28 @@
+.container-fluid
+    h1 Patient Processing Form
+    table.table
+        thead
+        tr
+            th Category
+            th Completed
+            th Scheduled
+        tbody
+        tr(ng-repeat='category in categories')
+            td {{category[0]}}
+            td
+                Test
+                .form-group
+                    input.form-control(type='number', name='{{category[1]}}', ng-model='patientProcessingForm[category[1]]', required='', placeholder='{{category[1]}}')      
+            td
+                Test
+                .form-group
+                    input.form-control(type='number', name='{{category[2]}}', ng-model='patientProcessingForm[category[2]]', required='', placeholder='{{category[2]}}')      
+              
+    br
+    
+    .form.group
+        label.control-label Additional Notes
+        textarea#comment.form-control(rows='5', ng-model='patientProcessingForm.notes', name='notes', required='required', placeholder='Put Your Comments Here...')
+    br
+    .button-group
+        button.btn.btn-primary(ng-click='submit()') Submit
