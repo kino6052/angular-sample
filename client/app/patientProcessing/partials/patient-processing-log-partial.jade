@@ -1,1 +1,25 @@
-div This is the patientProcessing view.
+.container-fluid(ng-init="getData()")
+    h1 Patient Processing Log
+    table.table
+        thead
+        tr
+            th Date
+            th New Patients
+            th 1st Treatment
+            th Treatments
+            th ABI
+            th Biopsy
+            th No Shows
+            th Canceled
+            th
+        tbody
+        tr(ng-repeat='log in logs')
+            td Date
+            td {{log.newPatientCompleted}}/{{log.newPatientScheduled}}
+            td {{log.firstTreatmentCompleted}}/{{log.firstTreatmentScheduled}}
+            td {{log.treatmentsCompleted}}/{{log.treatmentsScheduled}}
+            td {{log.abiCompleted}}/{{log.abiScheduled}}
+            td {{log.biopsyCompleted}}/{{log.biopsyScheduled}}
+            td {{log.noShowsCompleted}}/{{log.noShowsScheduled}}
+            td {{log.canceledCompleted}}/{{log.canceledScheduled}}
+            td <button class="btn" ng-click="remove(log._id)">Delete</button>
