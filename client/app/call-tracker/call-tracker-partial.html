@@ -1,0 +1,88 @@
+<div class="container-fluid">
+  <h1>Call Tracker</h1>
+  <form name="userForm" novalidate="novalidate">
+    <div show-errors="show-errors" class="form-group">
+      <label class="control-label">Call Started at</label>
+      <input type="datetime-local" name="callInitiated" ng-model="user.callInitiated" required="required" class="form-control"/>
+      <p ng-if="userForm.callInitiated.$error.required" class="help-block">The call initiation time is required</p>
+    </div>
+    <div show-errors="show-errors" class="form-group">
+      <label class="control-label">First Name</label>
+      <input type="text" name="firstName" ng-model="user.firstName" required="required" placeholder="First Name" class="form-control"/>
+      <p ng-if="userForm.firstName.$error.required" class="help-block">The user's name is required</p>
+    </div>
+    <div show-errors="show-errors" class="form-group">
+      <label class="control-label">Last Name</label>
+      <input type="text" name="lastName" ng-model="user.lastName" required="required" placeholder="Last Name" class="form-control"/>
+      <p ng-if="userForm.lastName.$error.required" class="help-block">The user's name is required</p>
+    </div>
+    <div show-errors="show-errors" class="form group">
+      <label class="control-label">Phone</label>
+      <input type="text" name="phone" phone-input="phone-input" ng-model="user.phoneNumber" required="required" placeholder="Phone" class="form-control input-phone"/>
+      <p ng-if="userForm.phone.$error.required" class="help-block">The user's phone is required</p>
+    </div><br/>
+    <div show-errors="show-errors" class="form group">
+      <label class="control-label">How Can We Help?</label><br/>
+      <div>
+        <label class="radio-inline">
+          <input type="radio" ng-model="user.callType" value="Change"/><span>Change</span>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="user.callType" value="Cancel"/><span>Cancel</span>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="user.callType" value="Other"/><span>Other</span>
+        </label>
+      </div>
+    </div><br/>
+    <div show-errors="show-errors" class="form group">
+      <label class="control-label">What was the Result of the Call?</label><br/>
+      <div>
+        <label class="radio-inline">
+          <input type="radio" ng-model="user.outcome" value="Scheduled"/><span>Scheduled</span>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="user.outcome" value="Followup"/><span>Follow-up</span>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="user.outcome" value="Insurance"/><span>Insurance not Accepted</span>
+        </label>
+      </div>
+    </div><br/>
+    <div show-errors="show-errors" class="form group">
+      <label class="control-label">Additional Notes</label>
+      <textarea rows="5" ng-model="user.notes" id="comment" name="notes" required="required" placeholder="Put Your Comments Here..." class="form-control"></textarea>
+      <p ng-if="userForm.notes.$error.required" class="help-block">The comments are required</p>
+    </div><br/>
+    <div class="button-group">
+      <button ng-click="save()" class="btn btn-primary">Submit</button>
+      <button ng-click="getData()" class="btn btn-primary">Get Data</button>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Call Initiated</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone Number</th>
+          <th>Call Type</th>
+          <th>Outcome</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="ticket in users">
+          <td>{{ticket._id}}</td>
+          <td>{{ticket.callInitiated}}</td>
+          <td>{{ticket.firstName}}</td>
+          <td>{{ticket.lastName}}</td>
+          <td>{{ticket.phoneNumber}}</td>
+          <td>{{ticket.callType}}</td>
+          <td>{{ticket.outcome}}</td>
+          <td>{{ticket.notes}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

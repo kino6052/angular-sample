@@ -58,4 +58,28 @@ div.container-fluid
             p.help-block(ng-if="userForm.notes.$error.required") The comments are required
         br
         
-        button.btn.btn-primary(ng-click="save()") Submit
+        div.button-group
+            button.btn.btn-primary(ng-click="save()") Submit
+            button.btn.btn-primary(ng-click="getData()") Get Data
+        
+        table.table
+            thead
+                tr
+                    th id
+                    th Call Initiated
+                    th First Name
+                    th Last Name
+                    th Phone Number
+                    th Call Type
+                    th Outcome
+                    th Notes
+            tbody
+                tr(ng-repeat="ticket in users")
+                    td {{ticket._id}}
+                    td {{ticket.callInitiated}}
+                    td {{ticket.firstName}}
+                    td {{ticket.lastName}}
+                    td {{ticket.phoneNumber}}
+                    td {{ticket.callType}}
+                    td {{ticket.outcome}}
+                    td {{ticket.notes}}

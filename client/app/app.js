@@ -12,9 +12,29 @@ angular.module('oxhnApp', [
   'ui.bootstrap',
   'validation.match'
 ])
-  .config(function($urlRouterProvider, $locationProvider) {
+  .config(function($urlRouterProvider, $locationProvider, $stateProvider) {
+    
+    // Routes
     $urlRouterProvider
       .otherwise('/');
-
+    
     $locationProvider.html5Mode(true);
+    
+    $stateProvider
+    .state('call', {
+      url: "/call-tracker",
+      templateUrl: "app/main/main.html",
+      controller: "MainController"
+    })
+    .state('call.questionaire', {
+      url: "/questionaire",
+      templateUrl: "app/call-tracker/call-tracker-partial.html",
+      controller: "CallTrackerCtrl"
+    })
+    .state('call.call-log', {
+      url: "/call-log",
+      templateUrl: "app/call-tracker/call-tracker.html",
+      controller: "CallTrackerCtrl"
+    })
+    ;
   });
