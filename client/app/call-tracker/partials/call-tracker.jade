@@ -11,13 +11,13 @@
             input.form-control(type='text', name='lastName', ng-model='user.lastName', required='', placeholder='Last Name')     
             p.help-block(ng-if='userForm.lastName.$error.required') The user&apos;s name is required
 
-        .form.group(show-errors='show-errors')
+        .form-group(show-errors='show-errors')
             label.control-label Phone
             |<input class="form-control input-phone" type='text' name='phone' phone ng-model='user.phoneNumber' required placeholder='Phone'>
             p.help-block(ng-if='userForm.phone.$error.required') The user&apos;s phone is required
         br
         
-        .form.group
+        .form-group
             label.control-label How Can We Help?
             br
 
@@ -34,13 +34,13 @@
                 input(type='radio', ng-model='user.callType', value='Other')
                 span Other   
             br
-        .form.group(show-errors='show-errors', ng-if="user.callType==='Other'") 
+        .form-group(show-errors='show-errors', ng-if="user.callType==='Other'") 
             label.control-label Other      
             textarea.form-control(rows='5', ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required)
             p.help-block(ng-if='userForm.other.$error.required') This field is required
         br
 
-        .form.group(show-errors='show-errors')
+        .form-group(show-errors='show-errors')
             label.control-label What was the Result of the Call?
             br
 
@@ -73,13 +73,13 @@
                     li
                         input(type='radio', href='#', ng-model='user.ocFollowUp', value='7')
                         | 7 Days
-        .form.group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")  
+        .form-group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")  
             label.control-label Insurance Issue    
             textarea.form-control(rows='5',  ng-model='user.insurance', name='insurance', placeholder='How can we help?', required='')
             p.help-block(ng-if='userForm.insurance.$error.required') This field is required
         br
         
-        .form.group(show-errors='show-errors')
+        .form-group(show-errors='show-errors')
             label.control-label Additional Notes
             textarea#comment.form-control(rows='5', ng-model='user.notes', name='notes', required='required', placeholder='Put Your Comments Here...')
             p.help-block(ng-if='userForm.notes.$error.required') The comments are required

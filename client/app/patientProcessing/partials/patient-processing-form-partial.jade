@@ -19,7 +19,7 @@
                     label.control-label {{category[0]}}
                     input.form-control(type='number', name='{{category[2]}}', ng-model='patientProcessingForm[category[2]]', required='', placeholder='{{category[2]}}')
                     p.help-block(ng-if="processingForm[category[2]].$error.required") This field is required
-        .form.group(show-errors)
+        .form-group(show-errors)
             label.control-label Additional Notes
             textarea#comment.form-control(rows='5', ng-model='patientProcessingForm.notes', name='notes', required='required', placeholder='Put Your Comments Here...')
     br
