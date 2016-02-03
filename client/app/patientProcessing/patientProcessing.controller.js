@@ -27,11 +27,13 @@ angular.module('oxhnApp')
     
     // Submit Data to the Database
     $scope.submit = function(){
+        $scope.$broadcast('show-errors-check-validity'); // Some fields are not set, turn on the red light
         if ($scope.processingForm.$invalid) { return; }   
         $http.post('/api/patient-processings/', $scope.patientProcessingForm).then( 
             function(response){
+                $scope.$broadcast('show-errors-reset');
                 alert("Successfully added to the Database!");
-                $scope.reset();
+                $scope.reset();  
             },
             function(error){
                 console.log(error);

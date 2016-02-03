@@ -17,11 +17,10 @@
             p.help-block(ng-if='userForm.phone.$error.required') The user&apos;s phone is required
         br
         
-        .form-group
+        .form-group(show-errors='show-errors')
             label.control-label How Can We Help?
             br
 
-            div
             label.radio-inline
                 input(type='radio', ng-model='user.callType', value='Change')
                 span Change
@@ -44,7 +43,6 @@
             label.control-label What was the Result of the Call?
             br
 
-            div
             label.radio-inline
                 input(type='radio', ng-model='user.outcome', value='Scheduled')
                 span Scheduled

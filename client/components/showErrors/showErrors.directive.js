@@ -22,6 +22,7 @@ angular.module('oxhnApp')
               if (mode == "toggle"){
                 element.toggleClass('has-success', !invalid);
                 element.toggleClass('has-error', invalid);
+                addGlyphicon(element, invalid);
               }
               if (mode == "reset"){
                 element.removeClass('has-error');
@@ -35,6 +36,20 @@ angular.module('oxhnApp')
           }
           return;
       } 
+      
+      // add the glyphicon
+      var addGlyphicon = function(formGroupElement, invalid){
+          if (!formGroupElement) return;
+          if (formGroupElement.hasClass("input-group")){
+              formGroupElement.children(".input-group-addon").remove();
+              !invalid?formGroupElement.append("<span class='input-group-addon'><span  class='glyphicon glyphicon-ok'></span></span>"):formGroupElement.append("<span class='input-group-addon'><span class='glyphicon glyphicon-remove'></span></span>");
+          }
+          else {
+              formGroupElement.children().each(function(element){
+                 addGlyphicon($(this), invalid); 
+              });
+          }
+      }
       // find the text box element, which has the 'name' attribute
       var inputEl   = el[0].querySelector("[name]");
       // convert the native text box element to an angular element
@@ -66,8 +81,7 @@ angular.module('oxhnApp')
       });
       
       scope.$on('show-errors-reset', function() {
-          el.removeClass('has-error');
-          el.removeClass('has-success');
+          findFormControl('reset', el);
       });
     }
   };
