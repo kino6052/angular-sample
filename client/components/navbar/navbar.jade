@@ -12,25 +12,21 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarController')
       ul.nav.navbar-nav
         li(ng-repeat='item in nav.menu', ui-sref-active='active')
           a(ui-sref='{{item.state}}') {{item.title}}
-
-        li
-            a(ui-sref='call.questionaire') Questionaire
-        li  
-            a(ui-sref='call.call-log') Call Log
             
         |<li class="dropdown">
-        |  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+        |  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-phone-alt"></span> Call Tracker <span class="caret"></span></a>
         |  <ul class="dropdown-menu">
-        |    <li><a href="#">Action</a></li>
-        |    <li><a href="#">Another action</a></li>
-        |    <li><a href="#">Something else here</a></li>
-        |    <li role="separator" class="divider"></li>
-        |    <li><a href="#">Separated link</a></li>
-        |    <li role="separator" class="divider"></li>
-        |    <li><a href="#">One more separated link</a></li>
+        |    <li><a ui-sref='tracker'>Questionaire</a></li>
+        |    <li><a ui-sref='call-log'>Call Log</a></li>
         |  </ul>
         |</li>
-
+        |<li class="dropdown">
+        |  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-file"></span> Patient Processing <span class="caret"></span></a>
+        |  <ul class="dropdown-menu">
+        |    <li><a ui-sref='patient-processing-form'>Patient Processing Form</a></li>
+        |    <li><a ui-sref='patient-processing-log'>Patient Processing Log</a></li>
+        |  </ul>
+        |</li>
         li(ng-show='nav.isAdmin()', ui-sref-active='active')
           a(ui-sref='admin') Admin
 

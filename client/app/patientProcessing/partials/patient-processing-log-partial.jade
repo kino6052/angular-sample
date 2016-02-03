@@ -1,0 +1,27 @@
+.container-fluid(ng-init="getData()")
+    h1 Patient Processing Log
+    table.table
+        thead
+        tr
+            th Date
+            th New Patients
+            th 1st Treatment
+            th Treatments
+            th ABI
+            th Biopsy
+            th No Shows
+            th Canceled
+            th Notes
+            th
+        tbody
+        tr(ng-repeat='log in logs')
+            td {{log.date}}
+            td {{log.newPatientCompleted}}/{{log.newPatientScheduled}}
+            td {{log.firstTreatmentCompleted}}/{{log.firstTreatmentScheduled}}
+            td {{log.treatmentsCompleted}}/{{log.treatmentsScheduled}}
+            td {{log.abiCompleted}}/{{log.abiScheduled}}
+            td {{log.biopsyCompleted}}/{{log.biopsyScheduled}}
+            td {{log.noShowsCompleted}}/{{log.noShowsScheduled}}
+            td {{log.canceledCompleted}}/{{log.canceledScheduled}}
+            td {{log.notes}}
+            td <button class="btn" ng-click="remove(log._id)">Delete</button>

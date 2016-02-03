@@ -17,6 +17,8 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/patient-processing-temp/patient-processing-temp.socket').register(socket);
+  require('../api/patient-processing/patient-processing.socket').register(socket);
   require('../api/call-ticket/call-ticket.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 
