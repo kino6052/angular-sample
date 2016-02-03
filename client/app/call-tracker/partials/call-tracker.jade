@@ -2,18 +2,21 @@
     h1 Call Tracker  
     form(name='userForm', novalidate='')
         .form-group(show-errors='show-errors')
-            label.control-label First Name   
-            input.form-control(type='text', name='firstName', ng-model='user.firstName', required='', placeholder='First Name')      
-            p.help-block(ng-if='userForm.firstName.$error.required') The user&apos;s name is required
+            label.control-label First Name
+            .input-group   
+                input.form-control(type='text', name='firstName', ng-model='user.firstName', required='', placeholder='First Name')      
+            p.help-block(ng-if='userForm.firstName.$error.required') The user's name is required
 
         .form-group(show-errors='show-errors')
-            label.control-label Last Name 
-            input.form-control(type='text', name='lastName', ng-model='user.lastName', required='', placeholder='Last Name')     
+            label.control-label Last Name
+            .input-group 
+                input.form-control(type='text', name='lastName', ng-model='user.lastName', required='', placeholder='Last Name')     
             p.help-block(ng-if='userForm.lastName.$error.required') The user&apos;s name is required
 
         .form-group(show-errors='show-errors')
             label.control-label Phone
-            |<input class="form-control input-phone" type='text' name='phone' phone ng-model='user.phoneNumber' required placeholder='Phone'>
+            .input-group
+                |<input class="form-control input-phone" type='text' name='phone' phone ng-model='user.phoneNumber' required placeholder='Phone'>
             p.help-block(ng-if='userForm.phone.$error.required') The user&apos;s phone is required
         br
         
