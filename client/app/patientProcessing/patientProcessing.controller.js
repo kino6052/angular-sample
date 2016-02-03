@@ -12,7 +12,7 @@ angular.module('oxhnApp')
         ['Canceled', 'canceledCompleted', 'canceledScheduled']
     ];
     $scope.patientProcessingData = [];
-    $scope.patientProcessingForm = {};
+    $scope.patientProcessingForm = {date: new Date().toUTCString()};
     $scope.logs = [];
     $scope.getData = function(){
         $http.get('/api/patient-processings').then(
@@ -24,24 +24,31 @@ angular.module('oxhnApp')
             }
         );
     }
+    
+    // Submit Data to the Database
     $scope.submit = function(){
-        //if ($scope.newPatientsCompleted.$invalid) { return; }
-        //$scope.patientProcessingData.push($.extend({},$scope.patientProcessingForm));
-        
+        if ($scope.processingForm.$invalid) { return; }   
         $http.post('/api/patient-processings/', $scope.patientProcessingForm).then( 
             function(response){
-                console.log(response);
+                alert("Successfully added to the Database!");
+                $scope.reset();
             },
             function(error){
                 console.log(error);
+                alert("Something went wrong...");
             }
         )
     };
+    
+    // Reset the Form
+    $scope.reset = function(){
+        $scope.patientProcessingForm = $.extend({}, {date: new Date().toUTCString()});
+    }
+    
     // Delete Log
     $scope.remove = function(id) {
         $http.delete('/api/patient-processings/' + id).then(
             function(response){
-                console.log(response);
                 $scope.getData();
             },
             function(error){

@@ -11,10 +11,11 @@
             th Biopsy
             th No Shows
             th Canceled
+            th Notes
             th
         tbody
         tr(ng-repeat='log in logs')
-            td Date
+            td {{log.date}}
             td {{log.newPatientCompleted}}/{{log.newPatientScheduled}}
             td {{log.firstTreatmentCompleted}}/{{log.firstTreatmentScheduled}}
             td {{log.treatmentsCompleted}}/{{log.treatmentsScheduled}}
@@ -22,4 +23,5 @@
             td {{log.biopsyCompleted}}/{{log.biopsyScheduled}}
             td {{log.noShowsCompleted}}/{{log.noShowsScheduled}}
             td {{log.canceledCompleted}}/{{log.canceledScheduled}}
+            td {{log.notes}}
             td <button class="btn" ng-click="remove(log._id)">Delete</button>

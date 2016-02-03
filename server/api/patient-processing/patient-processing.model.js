@@ -8,6 +8,10 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false  
+    },
     newPatientCompleted: {
         type: DataTypes.INTEGER,
         allowNull: false
@@ -62,6 +66,10 @@ export default function(sequelize, DataTypes) {
     },
     canceledScheduled: {
         type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    notes: {
+        type: DataTypes.STRING,
         allowNull: false
     }
   });
