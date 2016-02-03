@@ -7,7 +7,11 @@ angular.module('oxhnApp')
     require: '^form',
     link: function (scope, el, attrs, formCtrl) {
       var findClosestParentThatHasInvalidProperty = function(element){
-          if (!formCtrl[element.attr('name')] || formCtrl[element.attr('name')].$invalid === "undefined") return findClosestParentThatHasInvalidProperty(element.parent());
+          console.log(element.hasClass("ng-scope"), element.get(0).tagName);
+          if (!element.parent()) { // something wrong happened; have to stop recursion
+              return;
+          }
+          if (!element || !formCtrl[element.attr('name')] || formCtrl[element.attr('name')].$invalid === "undefined") return findClosestParentThatHasInvalidProperty(element.parent());
           else {
               return element
           }
@@ -25,8 +29,11 @@ angular.module('oxhnApp')
               }
           }
           else {
-              findFormControl(mode, element.parent(), invalid);
+              if (element.parent()){
+                findFormControl(mode, element.parent(), invalid);                 
+              }
           }
+          return;
       } 
       // find the text box element, which has the 'name' attribute
       var inputEl   = el[0].querySelector("[name]");
