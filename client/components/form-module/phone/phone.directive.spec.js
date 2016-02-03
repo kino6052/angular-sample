@@ -1,9 +1,9 @@
 'use strict';
 
-describe('Directive: showErrors', function () {
+describe('Directive: phone', function () {
 
   // load the directive's module
-  beforeEach(module('oxhnApp'));
+  beforeEach(module('form.module'));
 
   var element,
     scope;
@@ -13,8 +13,8 @@ describe('Directive: showErrors', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<show-errors></show-errors>');
+    element = angular.element('<phone></phone>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the showErrors directive');
+    expect(element.text()).toBe('this is the phone directive');
   }));
 });

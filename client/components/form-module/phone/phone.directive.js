@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('oxhnApp')
+formModule
 .directive('phone', function($filter, $browser) {
     return {
         require: 'ngModel',

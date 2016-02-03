@@ -10,7 +10,8 @@ angular.module('oxhnApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'validation.match'
+  'validation.match',
+  'form.module'
 ])
   .config(function($urlRouterProvider, $locationProvider, $stateProvider) {
     

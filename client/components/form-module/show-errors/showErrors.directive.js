@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('oxhnApp')
+formModule
   .directive('showErrors', function() {
   return {
     restrict: 'A',
