@@ -72,12 +72,12 @@ angular.module('oxhnApp')
         success(suc = angular.noop) {
           /**
            * Open a delete confirmation modal
-           * @param  {String} name   - name or info to show on modal
+           * @param  {Function} callback   - callback to execute after modal is closed
            * @param  {All}           - any additional args are passed straight to del callback
            */
           return function() {
             var args = Array.prototype.slice.call(arguments),
-                name = args.shift(),
+                callback = args.shift(),
                 successModal;
 
             successModal = openModal({
@@ -90,6 +90,7 @@ angular.module('oxhnApp')
                   text: 'Ok',
                   click: function(e) {
                     successModal.close(e);
+                    callback();
                   }
                 }]
               }
