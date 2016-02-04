@@ -1,6 +1,6 @@
 .container-fluid
     h1 Call Tracker  
-    form(name='userForm', novalidate='')
+    form.animate-show(name='userForm', novalidate='',ng-show="isVisible")
         .form-group(show-errors='show-errors')
             label.control-label First Name
             .input-group   

@@ -23,3 +23,11 @@
 .modal-danger .modal-header {
   background: $brand-danger;
 }
+.show-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.show-hide.ng-hide {
+  opacity:0;
+}

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('CallTrackerCtrl', function ($scope, $http) {
+  .controller('CallTrackerCtrl', function ($scope, $http, Modal) {
     $scope.users = [];
     // Model
     $scope.user = {
@@ -13,14 +13,18 @@ angular.module('oxhnApp')
     
     var followupDate = new Date();
     
+    // Success Modal
+    $scope.modal = Modal.confirm.success();
+    $scope.isVisible = true;
     // Save User
     $scope.save = function() {
         $scope.$broadcast('show-errors-check-validity');
         if ($scope.userForm.$invalid) { return; }
+        $scope.isVisible = false;
         if ($scope.user.ocFollowUp){
             followupDate.setDate(followupDate.getUTCDay() + $scope.user.ocFollowUp);
             $scope.user.ocFollowUp = followupDate.toUTCString();
-            console.log()
+            
         }
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
@@ -32,6 +36,7 @@ angular.module('oxhnApp')
                     callInitiated: new Date().toUTCString()
                 };
                 $scope.$broadcast('show-errors-reset');
+                $scope.modal(()=>{$scope.isVisible=true;});
             },
             function(error){
                 console.log(error);
@@ -63,4 +68,38 @@ angular.module('oxhnApp')
             }
         );
     };
+  })
+  .animation('.animate-show', function() {
+  return {
+    enter : function(element, done) {
+      element.css('opacity',0);
+      jQuery(element).animate({
+        opacity: 1
+      }, done);
+
+      // optional onDone or onCancel callback
+      // function to handle any post-animation
+      // cleanup operations
+      return function(isCancelled) {
+        if(isCancelled) {
+          jQuery(element).stop();
+        }
+      }
+    },
+    leave : function(element, done) {
+      element.css('opacity', 1);
+      jQuery(element).animate({
+        opacity: 0
+      }, done);
+
+      // optional onDone or onCancel callback
+      // function to handle any post-animation
+      // cleanup operations
+      return function(isCancelled) {
+        if(isCancelled) {
+          jQuery(element).stop();
+        }
+      }
+    }
+  }
   });
