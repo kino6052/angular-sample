@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('oxhnApp')
-  .controller('PatientProcessingCtrl', function ($scope, $http) {
+angular.module('form.module')
+  .controller('FormModuleCtrl', function ($scope, $http, submitForm) {
     $scope.categories = [
         ['New Patient', 'newPatientCompleted', 'newPatientScheduled'],
         ['1st Treatment', 'firstTreatmentCompleted', 'firstTreatmentScheduled'],
@@ -24,6 +24,8 @@ angular.module('oxhnApp')
             }
         );
     }
+    
+    console.log(submitForm);
     
     
     // Submit Data to the Database

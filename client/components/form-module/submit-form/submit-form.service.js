@@ -6,8 +6,9 @@ formModule
             constructor(scope) {
                 this.scope = scope;
             }
-            submit() {
-                super.update();
+            submit(formObject, apiUrl) {
+
+                
             }
             reset() {
                 return 'test';
