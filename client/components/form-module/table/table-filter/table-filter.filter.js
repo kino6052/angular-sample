@@ -1,4 +1,4 @@
-angular.module('form.module', []).filter('tableFilter', function() {
+angular.module('form.module').filter('tableFilter', function() {
   return function(input) {
     switch (input) {
         case 'New Patients':
