@@ -1,6 +1,6 @@
 'use strict';
 
-formModule
+angular.module('form.module')
   .factory('submitForm', function () {
         class submitFormService {
             constructor(scope) {

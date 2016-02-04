@@ -1,6 +1,6 @@
 'use strict';
 
-formModule
+angular.module('form.module')
   .directive('showErrors', function() {
   return {
     restrict: 'A',
