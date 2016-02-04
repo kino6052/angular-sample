@@ -43,7 +43,6 @@ angular.module('form.module')
                 alert("Something went wrong...");
             }
         )
-        */
     };
     
     // Reset the Form
