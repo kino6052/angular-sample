@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('PatientProcessingCtrl', function ($scope, $http) {
+  .controller('PatientProcessingCtrl', function ($scope, $http, Modal) {
     $scope.categories = [
         ['New Patient', 'newPatientCompleted', 'newPatientScheduled'],
         ['1st Treatment', 'firstTreatmentCompleted', 'firstTreatmentScheduled'],
@@ -25,6 +25,8 @@ angular.module('oxhnApp')
         );
     }
     
+    // Success Modal
+    $scope.modal = Modal.confirm.success();
     
     // Submit Data to the Database
     $scope.submit = function(){
@@ -33,15 +35,14 @@ angular.module('oxhnApp')
         $http.post('/api/patient-processings/', $scope.patientProcessingForm).then( 
             function(response){
                 $scope.$broadcast('show-errors-reset');
-                alert("Successfully added to the Database!");
+                $scope.modal("Success");
                 $scope.reset();  
             },
             function(error){
                 console.log(error);
                 alert("Something went wrong...");
             }
-        )
-        */
+        );
     };
     
     // Reset the Form

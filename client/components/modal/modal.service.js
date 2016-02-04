@@ -67,6 +67,38 @@ angular.module('oxhnApp')
               del.apply(event, args);
             });
           };
+        },
+        
+        success(suc = angular.noop) {
+          /**
+           * Open a delete confirmation modal
+           * @param  {String} name   - name or info to show on modal
+           * @param  {All}           - any additional args are passed straight to del callback
+           */
+          return function() {
+            var args = Array.prototype.slice.call(arguments),
+                name = args.shift(),
+                successModal;
+
+            successModal = openModal({
+              modal: {
+                dismissable: true,
+                title: 'Success!',
+                html: '<p>The form was successfully saved!</p>',
+                buttons: [{
+                  classes: 'btn-success',
+                  text: 'Ok',
+                  click: function(e) {
+                    successModal.close(e);
+                  }
+                }]
+              }
+            }, 'modal-success');
+
+            successModal.result.then(function(event) {
+              suc.apply(event, args);
+            });
+          };
         }
       }
     };

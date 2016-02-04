@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('CallTrackerCtrl', function ($scope, $http) {
+  .controller('CallTrackerCtrl', function ($scope, $http, Modal) {
     $scope.users = [];
     // Model
     $scope.user = {
@@ -13,6 +13,9 @@ angular.module('oxhnApp')
     
     var followupDate = new Date();
     
+    // Success Modal
+    $scope.modal = Modal.confirm.success();
+    
     // Save User
     $scope.save = function() {
         $scope.$broadcast('show-errors-check-validity');
@@ -20,7 +23,7 @@ angular.module('oxhnApp')
         if ($scope.user.ocFollowUp){
             followupDate.setDate(followupDate.getUTCDay() + $scope.user.ocFollowUp);
             $scope.user.ocFollowUp = followupDate.toUTCString();
-            console.log()
+            
         }
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
@@ -32,6 +35,7 @@ angular.module('oxhnApp')
                     callInitiated: new Date().toUTCString()
                 };
                 $scope.$broadcast('show-errors-reset');
+                $scope.modal();
             },
             function(error){
                 console.log(error);
