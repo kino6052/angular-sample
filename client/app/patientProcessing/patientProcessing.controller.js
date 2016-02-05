@@ -1,7 +1,15 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('PatientProcessingCtrl', function ($scope, $http, $timeout, Modal) {
+  .controller('PatientProcessingCtrl', function ($scope, $http, $timeout, Modal, Auth) {
+     $scope.getCurrentUser = function(){
+        try {
+            return Auth.getCurrentUser().profile.name;
+        }
+        catch (err)
+        {console.log(err)}
+        return '';
+    }
     $scope.categories = [
         ['New Patient', 'newPatientCompleted', 'newPatientScheduled'],
         ['1st Treatment', 'firstTreatmentCompleted', 'firstTreatmentScheduled'],
@@ -12,7 +20,7 @@ angular.module('oxhnApp')
         ['Canceled', 'canceledCompleted', 'canceledScheduled']
     ];
     $scope.patientProcessingData = [];
-    $scope.patientProcessingForm = {date: new Date().toUTCString()};
+    $scope.patientProcessingForm = {date: moment().utc(), user: $scope.getCurrentUser()};
     $scope.logs = [];
     $scope.getData = function(){
         $http.get('/api/patient-processings').then(
@@ -24,7 +32,7 @@ angular.module('oxhnApp')
             }
         );
     }
-
+   
     // Form Properties
     $scope.isVisible=true;
     $scope.successSwitchState=false;

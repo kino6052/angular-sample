@@ -25,13 +25,13 @@ html
             tr(ng-click="click($event)" ng-show='true')
                 td {{ticket._id}}
                 td {{ticket.user}}
-                td {{ticket.callInitiated|dateFilter}}
+                td {{ticket.callInitiated|date}}
                 td {{ticket.firstName}}
                 td {{ticket.lastName}}
                 td {{ticket.phoneNumber}}
                 td {{ticket.callType}}
                 td {{ticket.callTypeOther}}
-                td {{ticket.ocFollowUp|dateFilter}}
+                td {{ticket.ocFollowUp|date}}
                 td {{ticket.outcome}}
             tr.notes-show(style="display:none")
                 td(colspan="9") 
