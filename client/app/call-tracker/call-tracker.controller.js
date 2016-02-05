@@ -1,14 +1,23 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('CallTrackerCtrl', function ($scope, $http, $timeout, Modal) {
+  .controller('CallTrackerCtrl', function ($scope, $http, $timeout, Modal, Auth) {
     $scope.users = [];
+    $scope.getCurrentUser = function(){
+        try {
+            return Auth.getCurrentUser().profile.name;
+        }
+        catch (err)
+        {console.log(err)}
+        return '';
+    }
     // Model
     $scope.user = {
         callType: 'Change',
         outcome: 'Scheduled',
         textarea: '',
-        callInitiated: new Date().toUTCString()
+        callInitiated: new Date().toUTCString(),
+        user: $scope.getCurrentUser()
     };
     
     var followupDate = new Date();

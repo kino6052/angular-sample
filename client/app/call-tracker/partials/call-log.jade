@@ -11,6 +11,7 @@ html
         thead
           tr
             th id
+            th Username
             th Call Initiated
             th First Name
             th Last Name
@@ -23,6 +24,7 @@ html
         tbody(ng-repeat='ticket in users|filter:query' )  
             tr(ng-click="click($event)" ng-show='true')
                 td {{ticket._id}}
+                td {{ticket.user}}
                 td {{ticket.callInitiated|dateFilter}}
                 td {{ticket.firstName}}
                 td {{ticket.lastName}}
