@@ -7,4 +7,9 @@
 .animate-show.ng-hide {
   opacity:0;
   display: block!important;
+  
+}
+
+tbody:nth-child(2n) tr {
+    background-color: lightgrey;
 }

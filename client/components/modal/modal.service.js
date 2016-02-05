@@ -90,7 +90,6 @@ angular.module('oxhnApp')
                   text: 'Ok',
                   click: function(e) {
                     successModal.close(e);
-                    callback();
                   }
                 }]
               }

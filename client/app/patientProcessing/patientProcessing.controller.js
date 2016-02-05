@@ -1,7 +1,15 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('PatientProcessingCtrl', function ($scope, $http, Modal) {
+  .controller('PatientProcessingCtrl', function ($scope, $http, $timeout, Modal, Auth) {
+     $scope.getCurrentUser = function(){
+        try {
+            return Auth.getCurrentUser().profile.name;
+        }
+        catch (err)
+        {console.log(err)}
+        return '';
+    }
     $scope.categories = [
         ['New Patient', 'newPatientCompleted', 'newPatientScheduled'],
         ['1st Treatment', 'firstTreatmentCompleted', 'firstTreatmentScheduled'],
@@ -12,7 +20,7 @@ angular.module('oxhnApp')
         ['Canceled', 'canceledCompleted', 'canceledScheduled']
     ];
     $scope.patientProcessingData = [];
-    $scope.patientProcessingForm = {date: new Date().toUTCString()};
+    $scope.patientProcessingForm = {date: moment().utc(), user: $scope.getCurrentUser()};
     $scope.logs = [];
     $scope.getData = function(){
         $http.get('/api/patient-processings').then(
@@ -24,18 +32,36 @@ angular.module('oxhnApp')
             }
         );
     }
-    
-    // Success Modal
-    $scope.modal = Modal.confirm.success();
-    
+   
+    // Form Properties
+    $scope.isVisible=true;
+    $scope.successSwitchState=false;
+    $scope.successSwitch=function(callback){
+        $scope.successSwitchState=!$scope.successSwitchState;
+        try {
+            callback();
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    // Table Click
+    $scope.click = function($event){
+        angular.element(
+            angular.element(
+                angular.element($event.currentTarget).parent()
+            ).children()[1]
+        ).toggle('ng-show');
+    }
     // Submit Data to the Database
     $scope.submit = function(){
         $scope.$broadcast('show-errors-check-validity'); // Some fields are not set, turn on the red light
-        if ($scope.processingForm.$invalid) { return; }   
+        if ($scope.processingForm.$invalid) { return; }
+        $scope.isVisible=false;
+        $scope.successSwitch();  
         $http.post('/api/patient-processings/', $scope.patientProcessingForm).then( 
             function(response){
                 $scope.$broadcast('show-errors-reset');
-                $scope.modal("Success");
+                $timeout(()=>{$scope.successSwitch($scope.isVisible=true);}, 2000);
                 $scope.reset();  
             },
             function(error){
@@ -47,7 +73,7 @@ angular.module('oxhnApp')
     
     // Reset the Form
     $scope.reset = function(){
-        $scope.patientProcessingForm = $.extend({}, {date: new Date().toUTCString()});
+        $scope.patientProcessingForm = $.extend({}, {date: moment().utc()});
     }
     
     // Delete Log

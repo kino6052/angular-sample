@@ -57,7 +57,15 @@ User.sync()
       name: 'Admin',
       email: 'admin@example.com',
       password: 'admin'
-    }])
+    },
+    {
+      provider: 'local',
+      role: 'admin',
+      name: 'Kirill Novik',
+      email: 'kirill.novik.csci@gmail.com',
+      password: 'test'
+    }
+    ])
     .then(() => {
       console.log('finished populating users');
     });

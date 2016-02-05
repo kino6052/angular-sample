@@ -40,5 +40,7 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    user: DataTypes.STRING,
+    allowNull: false
   });
 }

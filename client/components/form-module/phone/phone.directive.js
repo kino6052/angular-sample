@@ -1,6 +1,6 @@
 'use strict';
 
-formModule
+angular.module('form.module')
 .directive('phone', function($filter, $browser) {
     return {
         require: 'ngModel',
