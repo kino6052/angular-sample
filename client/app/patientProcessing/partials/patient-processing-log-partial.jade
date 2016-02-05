@@ -18,10 +18,8 @@
                     span(class="{{'No Shows'|tableFilter}}")
                 th
                     span(class="{{'Canceled'|tableFilter}}")
-                th Notes
-                th
-        tbody
-            tr(ng-repeat='log in logs')
+        tbody(ng-repeat='log in logs')
+            tr
                 td {{log.date}}
                 td {{log.newPatientCompleted}}/{{log.newPatientScheduled}}
                 td {{log.firstTreatmentCompleted}}/{{log.firstTreatmentScheduled}}
@@ -30,5 +28,5 @@
                 td {{log.biopsyCompleted}}/{{log.biopsyScheduled}}
                 td {{log.noShowsCompleted}}/{{log.noShowsScheduled}}
                 td {{log.canceledCompleted}}/{{log.canceledScheduled}}
+            tr(col-span="8", style="display: none")
                 td {{log.notes}}
-                td <button class="btn" ng-click="remove(log._id)">Delete</button>
