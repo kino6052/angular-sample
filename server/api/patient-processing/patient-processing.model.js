@@ -71,6 +71,10 @@ export default function(sequelize, DataTypes) {
     notes: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    user: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
   });
 }
