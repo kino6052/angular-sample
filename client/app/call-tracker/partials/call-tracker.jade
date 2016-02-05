@@ -24,21 +24,13 @@
         .form-group(show-errors='show-errors')
             label.control-label How Can We Help?
             br
-
-            label.radio-inline
-                input(type='radio', ng-model='user.callType', value='Change')
-                span Change
-
-            label.radio-inline
-                input(type='radio', ng-model='user.callType', value='Cancel')
-                span Cancel
-
-            label.radio-inline
-                input(type='radio', ng-model='user.callType', value='Other')
-                span Other   
+            div(class="btn-group")
+                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Change'" value="Change") Change
+                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Cancel'" value="Cancel") Cancel
+                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Other'" value="Other") Other
             br
         .form-group(show-errors='show-errors', ng-if="user.callType==='Other'") 
-            label.control-label Other      
+            label.control-label Other
             textarea.form-control(rows='5', ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required)
             p.help-block(ng-if='userForm.other.$error.required') This field is required
         br
@@ -46,35 +38,16 @@
         .form-group(show-errors='show-errors')
             label.control-label What was the Result of the Call?
             br
-
-            label.radio-inline
-                input(type='radio', ng-model='user.outcome', value='Scheduled')
-                span Scheduled
-
-            label.radio-inline
-                input(type='radio', ng-model='user.outcome', value='Followup')
-                span Follow-up
-
-            label.radio-inline
-                input(type='radio', ng-model='user.outcome', value='Insurance')
-                span Insurance not Accepted
+            div(class="btn-group")
+                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Scheduled'" value="Scheduled") Scheduled
+                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Followup'" value="Followup") Follow-up
+                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Insurance'" value="Insurance") Insurance
             br
-
-            #dropdownMenu2.dropdown(ng-if="user.outcome==='Followup'")
-                button.btn.btn-default(data-toggle='dropdown')
-                    span#dropdown_title2 {{user.ocFollowUp}}
-                    span.caret
-
-                ul.dropdown-menu
-                    li
-                        input(type='radio', href='#', ng-model='user.ocFollowUp', value='2')
-                        | 2 Days
-                    li
-                        input(type='radio', href='#', ng-model='user.ocFollowUp', value='5')
-                        | 5 Days
-                    li
-                        input(type='radio', href='#', ng-model='user.ocFollowUp', value='7')
-                        | 7 Days
+            div(class="btn-group" ng-if="user.outcome==='Followup'")
+                label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'2'" value="2") 2 Days
+                label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'5'" value="5") 5 Days
+                label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'7'" value="7") 7 Days
+          
         .form-group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")  
             label.control-label Insurance Issue    
             textarea.form-control(rows='5',  ng-model='user.insurance', name='insurance', placeholder='How can we help?', required='')

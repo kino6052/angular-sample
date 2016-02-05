@@ -11,6 +11,9 @@ angular.module('oxhnApp')
         {console.log(err)}
         return '';
     }
+    
+    // Radio Buttons
+    $scope.radioModelButtons = ['1', '2', '3'];
     // Model
     $scope.user = {
         callType: 'Change',
