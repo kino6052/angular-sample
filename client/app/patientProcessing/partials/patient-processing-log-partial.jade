@@ -19,8 +19,8 @@
                     span(class="{{'No Shows'|tableFilter}}")
                 th
                     span(class="{{'Canceled'|tableFilter}}")
-        tbody(ng-repeat='log in logs')
-            tr
+        tbody(ng-repeat='log in logs', )
+            tr(ng-click="click($event)")
                 td {{log.date|date}}
                 td {{log.user}}
                 td {{log.newPatientCompleted}}/{{log.newPatientScheduled}}
@@ -30,5 +30,5 @@
                 td {{log.biopsyCompleted}}/{{log.biopsyScheduled}}
                 td {{log.noShowsCompleted}}/{{log.noShowsScheduled}}
                 td {{log.canceledCompleted}}/{{log.canceledScheduled}}
-            tr(col-span="8", style="display: none")
-                td {{log.notes}}
+            tr(style="display: none")
+                td(colspan="9") {{log.notes}}

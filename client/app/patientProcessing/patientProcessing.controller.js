@@ -44,7 +44,14 @@ angular.module('oxhnApp')
             console.log(err);
         }
     };
-    
+    // Table Click
+    $scope.click = function($event){
+        angular.element(
+            angular.element(
+                angular.element($event.currentTarget).parent()
+            ).children()[1]
+        ).toggle('ng-show');
+    }
     // Submit Data to the Database
     $scope.submit = function(){
         $scope.$broadcast('show-errors-check-validity'); // Some fields are not set, turn on the red light
