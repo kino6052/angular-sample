@@ -21,7 +21,7 @@
                     span(class="{{'Canceled'|tableFilter}}")
         tbody(ng-repeat='log in logs', )
             tr(ng-click="click($event)")
-                td {{log.date|date}}
+                td {{log.date|dateFilter}}
                 td {{log.user}}
                 td {{log.newPatientCompleted}}/{{log.newPatientScheduled}}
                 td {{log.firstTreatmentCompleted}}/{{log.firstTreatmentScheduled}}

@@ -19,7 +19,7 @@ angular.module('oxhnApp')
         callType: 'Change',
         outcome: 'Scheduled',
         textarea: '',
-        callInitiated: new Date().toUTCString(),
+        callInitiated: moment().utc(),
         user: $scope.getCurrentUser()
     };
     
@@ -52,8 +52,7 @@ angular.module('oxhnApp')
         $scope.isVisible = false;
         $scope.successSwitch();
         if ($scope.user.ocFollowUp){
-            followupDate.setDate(followupDate.getUTCDay() + $scope.user.ocFollowUp);
-            $scope.user.ocFollowUp = followupDate.toUTCString();
+            $scope.user.ocFollowUp = moment().add(Number($scope.user.ocFollowUp), 'days').utc()
             
         }
         $http.post('/api/call-tickets', $scope.user).then(
@@ -63,7 +62,7 @@ angular.module('oxhnApp')
                     callType: 'Change',
                     outcome: 'Scheduled',
                     textarea: '',
-                    callInitiated: new Date().toUTCString()
+                    callInitiated: moment().utc()
                 };
                 $scope.$broadcast('show-errors-reset');
                 $timeout(()=>{$scope.successSwitch(()=>{$scope.isVisible=true;})}, 2000);

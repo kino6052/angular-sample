@@ -73,7 +73,7 @@ angular.module('oxhnApp')
     
     // Reset the Form
     $scope.reset = function(){
-        $scope.patientProcessingForm = $.extend({}, {date: new Date().toUTCString()});
+        $scope.patientProcessingForm = $.extend({}, {date: moment().utc()});
     }
     
     // Delete Log
