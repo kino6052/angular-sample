@@ -9,12 +9,14 @@ export function setup(User, config) {
   },
   function(accessToken, refreshToken, profile, done) {
     User.find({
-      'google.id': profile.id
+      'googleID': profile.id
     })
       .then(user => {
         if (user) {
           return done(null, user);
         }
+
+        console.log(profile);
 
         user = User.build({
           name: profile.displayName,
@@ -22,7 +24,8 @@ export function setup(User, config) {
           role: 'user',
           username: profile.emails[0].value.split('@')[0],
           provider: 'google',
-          google: profile._json
+          google: profile._raw,
+          googleID: profile.id
         });
         user.save()
           .then(user => done(null, user))

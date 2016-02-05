@@ -68,17 +68,18 @@
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
       <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
-      <script src="components/auth/auth.module.js"></script>
       <script src="app/admin/admin.module.js"></script>
+      <script src="components/auth/auth.module.js"></script>
       <script src="components/form-module/form.module.js"></script>
       <script src="components/util/util.module.js"></script>
-      <script src="app/admin/admin.controller.js"></script>
+      <script src="components/auth/user.service.js"></script>
       <script src="app/account/account.js"></script>
       <script src="app/admin/admin.router.js"></script>
       <script src="app/app.constant.js"></script>
@@ -87,25 +88,24 @@
       <script src="app/call-tracker/call-tracker.router.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
-      <script src="app/myRoute/myRoute.controller.js"></script>
-      <script src="app/myRoute/myRoute.js"></script>
       <script src="app/patientProcessing/patientProcessing.controller.js"></script>
       <script src="app/patientProcessing/patientProcessing.js"></script>
       <script src="app/patientProcessing/patientProcessing.router.js"></script>
-      <script src="app/questionaire/questionaire.controller.js"></script>
-      <script src="app/questionaire/questionaire.js"></script>
-      <script src="app/account/login/login.controller.js"></script>
+      <script src="app/account/settings/settings.controller.js"></script>
       <script src="components/auth/auth.service.js"></script>
       <script src="components/auth/interceptor.service.js"></script>
       <script src="components/auth/router.decorator.js"></script>
-      <script src="components/auth/user.service.js"></script>
+      <script src="app/account/login/login.controller.js"></script>
       <script src="components/dashboard/dashboard.directive.js"></script>
       <script src="components/footer/footer.directive.js"></script>
+      <script src="components/form-module/checkbox-buttons/checkbox-buttons.directive.js"></script>
+      <script src="components/form-module/date-formatter/date-formatter.filter.js"></script>
       <script src="components/form-module/form.module.controller.js"></script>
-      <script src="app/account/settings/settings.controller.js"></script>
+      <script src="app/account/signup/signup.controller.js"></script>
       <script src="components/form-module/phone/phone.directive.js"></script>
       <script src="components/form-module/show-errors/showErrors.directive.js"></script>
       <script src="components/form-module/submit-form/submit-form.service.js"></script>
+      <script src="components/form-module/table/table-filter/table-filter.filter.js"></script>
       <script src="components/modal/modal.service.js"></script>
       <script src="components/mongoose-error/mongoose-error.directive.js"></script>
       <script src="components/navbar/navbar.controller.js"></script>
@@ -113,7 +113,7 @@
       <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
       <script src="components/socket/socket.service.js"></script>
-      <script src="app/account/signup/signup.controller.js"></script>
+      <script src="app/admin/admin.controller.js"></script>
       <script src="components/util/util.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->

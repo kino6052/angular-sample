@@ -39,6 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     provider: DataTypes.STRING,
     salt: DataTypes.STRING,
     google: DataTypes.TEXT,
+    googleID: DataTypes.STRING,
     github: DataTypes.TEXT
 
   }, {
