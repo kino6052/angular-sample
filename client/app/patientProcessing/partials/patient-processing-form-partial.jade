@@ -1,9 +1,9 @@
 .container-fluid
     h1 Patient Processing Form
-    br
-    form(name="processingForm")
+    .alert.alert-success.animate-show(role="alert" ng-show="successSwitchState") Form Successfully Submitted!
+    form(name="processingForm" ng-show="isVisible").animate-show
         div.panel.panel-default
-            div.panel-heading Daily Report Data
+            div.panel-heading Daily Report Data     
             table.table.table-striped
                 tbody
                     tr(ng-repeat='category in categories')

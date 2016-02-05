@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('PatientProcessingCtrl', function ($scope, $http, Modal) {
+  .controller('PatientProcessingCtrl', function ($scope, $http, $timeout, Modal) {
     $scope.categories = [
         ['New Patient', 'newPatientCompleted', 'newPatientScheduled'],
         ['1st Treatment', 'firstTreatmentCompleted', 'firstTreatmentScheduled'],
@@ -24,18 +24,29 @@ angular.module('oxhnApp')
             }
         );
     }
-    
-    // Success Modal
-    $scope.modal = Modal.confirm.success();
+
+    // Form Properties
+    $scope.isVisible=true;
+    $scope.successSwitchState=false;
+    $scope.successSwitch=function(callback){
+        $scope.successSwitchState=!$scope.successSwitchState;
+        try {
+            callback();
+        } catch (err) {
+            console.log(err);
+        }
+    };
     
     // Submit Data to the Database
     $scope.submit = function(){
         $scope.$broadcast('show-errors-check-validity'); // Some fields are not set, turn on the red light
-        if ($scope.processingForm.$invalid) { return; }   
+        if ($scope.processingForm.$invalid) { return; }
+        $scope.isVisible=false;
+        $scope.successSwitch();  
         $http.post('/api/patient-processings/', $scope.patientProcessingForm).then( 
             function(response){
                 $scope.$broadcast('show-errors-reset');
-                $scope.modal("Success");
+                $timeout(()=>{$scope.successSwitch($scope.isVisible=true);}, 3000);
                 $scope.reset();  
             },
             function(error){
