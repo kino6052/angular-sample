@@ -1,5 +1,6 @@
 .container-fluid
-    h1 Call Tracker  
+    h1 Call Tracker
+    .alert.alert-success.animate-show(role="alert" ng-show="successSwitchState") Form Successfully Submitted!  
     form.animate-show(name='userForm', novalidate='',ng-show="isVisible")
         .form-group(show-errors='show-errors')
             label.control-label First Name

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('CallTrackerCtrl', function ($scope, $http, Modal) {
+  .controller('CallTrackerCtrl', function ($scope, $http, $timeout, Modal) {
     $scope.users = [];
     // Model
     $scope.user = {
@@ -13,14 +13,24 @@ angular.module('oxhnApp')
     
     var followupDate = new Date();
     
-    // Success Modal
-    $scope.modal = Modal.confirm.success();
-    $scope.isVisible = true;
+    // Form Properties
+    $scope.isVisible=true;
+    $scope.successSwitchState=false;
+    $scope.successSwitch=function(callback){
+        $scope.successSwitchState=!$scope.successSwitchState;
+        try {
+            callback();
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    
     // Save User
     $scope.save = function() {
         $scope.$broadcast('show-errors-check-validity');
         if ($scope.userForm.$invalid) { return; }
         $scope.isVisible = false;
+        $scope.successSwitch();
         if ($scope.user.ocFollowUp){
             followupDate.setDate(followupDate.getUTCDay() + $scope.user.ocFollowUp);
             $scope.user.ocFollowUp = followupDate.toUTCString();
@@ -36,7 +46,7 @@ angular.module('oxhnApp')
                     callInitiated: new Date().toUTCString()
                 };
                 $scope.$broadcast('show-errors-reset');
-                $scope.modal(()=>{$scope.isVisible=true;});
+                $timeout(()=>{$scope.successSwitch(()=>{$scope.isVisible=true;})}, 2000);
             },
             function(error){
                 console.log(error);

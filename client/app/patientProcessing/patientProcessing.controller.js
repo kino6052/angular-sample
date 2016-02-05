@@ -46,7 +46,7 @@ angular.module('oxhnApp')
         $http.post('/api/patient-processings/', $scope.patientProcessingForm).then( 
             function(response){
                 $scope.$broadcast('show-errors-reset');
-                $timeout(()=>{$scope.successSwitch($scope.isVisible=true);}, 3000);
+                $timeout(()=>{$scope.successSwitch($scope.isVisible=true);}, 2000);
                 $scope.reset();  
             },
             function(error){
