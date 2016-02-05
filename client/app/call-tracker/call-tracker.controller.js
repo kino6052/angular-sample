@@ -25,6 +25,14 @@ angular.module('oxhnApp')
         }
     };
     
+    $scope.click = function($event){
+        angular.element(
+            angular.element(
+                angular.element($event.currentTarget).parent()
+            ).children()[1]
+        ).toggle('ng-show');
+    }
+    
     // Save User
     $scope.save = function() {
         $scope.$broadcast('show-errors-check-validity');
