@@ -32,17 +32,10 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarController')
 
       ul.nav.navbar-nav.navbar-right
         li(ng-hide='nav.isLoggedIn()', ui-sref-active='active')
-          a(ui-sref='signup') Sign up
-
-        li(ng-hide='nav.isLoggedIn()', ui-sref-active='active')
-          a(ui-sref='login') Login
+          oauth-buttons(classes='')
 
         li(ng-show='nav.isLoggedIn()')
           p.navbar-text Hello {{ nav.getCurrentUser().name }}
-
-        li(ng-show='nav.isLoggedIn()', ui-sref-active='active')
-          a(ui-sref='settings')
-            span.glyphicon.glyphicon-cog
 
         li(ng-show='nav.isLoggedIn()')
           a(ui-sref='logout') Logout

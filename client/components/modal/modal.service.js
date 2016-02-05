@@ -79,6 +79,7 @@ angular.module('oxhnApp')
             var args = Array.prototype.slice.call(arguments),
                 callback = args.shift(),
                 successModal;
+                
 
             successModal = openModal({
               modal: {
@@ -90,6 +91,10 @@ angular.module('oxhnApp')
                   text: 'Ok',
                   click: function(e) {
                     successModal.close(e);
+                    try {
+                        callback();
+                    }
+                    catch(err) { console.log(err); }
                   }
                 }]
               }
