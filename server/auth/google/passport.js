@@ -33,9 +33,9 @@ export function setup(User, config) {
                 .then(user => done(null, user))
                 .catch(err => done(err));
         } else {
-            throw "Email is Not of OXHN Domain!"
+            return done(null, false, { message: 'Email is Not of OXHN Domain!' });
         }
-        
+
       })
       .catch(err => done(err));
   }));
