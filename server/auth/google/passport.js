@@ -27,9 +27,15 @@ export function setup(User, config) {
           google: profile._raw,
           googleID: profile.id
         });
-        user.save()
-          .then(user => done(null, user))
-          .catch(err => done(err));
+        var oxhnEmail = /[A-Za-z]{3,}@oxhn.com/g;
+        if (user.email.match(oxhnEmail)){
+            user.save()
+                .then(user => done(null, user))
+                .catch(err => done(err));
+        } else {
+            throw "Email is Not of OXHN Domain!"
+        }
+        
       })
       .catch(err => done(err));
   }));
