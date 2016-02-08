@@ -70,13 +70,13 @@ export function index(req, res) {
 // Gets a list of CallTickets for a Specific User
 export function filteredIndex(req, res) {
   console.log("USER NAME: " + req.params.name)
-  CallTicket.findOne({
-    where: {
-        user: req.params.name
-    }
-  })
-    .then(() => {respondWithResult(res);} )
+    CallTicket.findAll({
+        where: {
+            user: req.params.name
+        }
+    })
     .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
