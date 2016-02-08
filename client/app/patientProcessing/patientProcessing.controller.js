@@ -1,5 +1,6 @@
 'use strict';
 
+
 angular.module('oxhnApp')
   .controller('PatientProcessingCtrl', function ($scope, $http, $timeout, Modal, Auth) {
      $scope.getCurrentUser = function(){

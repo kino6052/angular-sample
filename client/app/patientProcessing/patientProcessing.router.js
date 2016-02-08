@@ -12,12 +12,14 @@ angular.module('oxhnApp')
     .state('patient-processing-form', {
       url: "/patient-processing-form",
       templateUrl: "app/patientProcessing/partials/patient-processing-form-partial.html",
-      controller: "PatientProcessingCtrl"
+      controller: "PatientProcessingCtrl",
+      authenticate: 'user'
     })
     .state('patient-processing-log', {
       url: "/patient-processing-log",
       templateUrl: "app/patientProcessing/partials/patient-processing-log-partial.html",
-      controller: "PatientProcessingCtrl"
+      controller: "PatientProcessingCtrl",
+      authenticate: 'user'
     })
     ;
   });

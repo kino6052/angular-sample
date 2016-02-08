@@ -12,12 +12,14 @@ angular.module('oxhnApp')
     .state('tracker', {
       url: "/tracker",
       templateUrl: "app/call-tracker/partials/call-tracker.html",
-      controller: "CallTrackerCtrl"
+      controller: "CallTrackerCtrl",
+      authenticate: 'user'
     })
     .state('call-log', {
       url: "/call-log",
       templateUrl: "app/call-tracker/partials/call-log.html",
-      controller: "CallTrackerCtrl"
+      controller: "CallTrackerCtrl",
+      authenticate: 'user'
     })
     ;
   });

@@ -11,7 +11,7 @@ angular.module('oxhnApp')
             textarea: '',
             callInitiated: moment().utc(),
             ocFollowUp: '2',
-            user: ''
+            user: Auth.getCurrentUser().name
         },
         getCurrentUser: function(){
             try { return Auth.getCurrentUser().profile.name; } catch (err) { console.log(err) }

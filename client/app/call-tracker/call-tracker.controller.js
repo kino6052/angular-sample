@@ -37,12 +37,12 @@ angular.module('oxhnApp')
      * @param  {String} endpoint    - url of the endpoint to which POST request is sent
      * @param  {Object} data        - data to be submitted
      */
-    $scope.post = (endpoint, data) => {
+    $scope.post = (endpoint, data, showErrorsFunction, resetErrorsFunction) => {
         // Check for Errors and Display Error Messages
         // TODO: Make a hook instead of binding to a scope variable.
         // This way it can be abstracted into a service.
         // For example a hook like 
-        //      showErrorsHook = showErrorsFunction (@param)
+        //      showErrorsHook = showErrorsFunction (where the latter is a parameter that can be anything)
         $scope.$broadcast('show-errors-check-validity');
         // Prevent from Submitting in Case of Errors
         if ($scope.userForm.$invalid) { return; }
@@ -64,7 +64,13 @@ angular.module('oxhnApp')
     $scope.get = (endpoint) => {
         // Set users to response data (Seems to be not safe to assign to a global variable)
         // TODO: Find out how to do this without using outer scope variable
-        webService.get(endpoint, (response) => {$scope.users = response.data;});
+        webService.get(endpoint, (response) => {$scope.users = Array.isArray(response.data)?response.data:[response.data]});
     }
-    $scope.getData = () => { $scope.get('/api/call-tickets'); }
+    
+    $scope.getData = () => { 
+                    
+        var username = Auth.getCurrentUser().name;
+        $scope.get('/api/call-tickets/filtered/' + username);
+
+    }
   });

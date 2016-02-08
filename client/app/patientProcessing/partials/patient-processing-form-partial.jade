@@ -2,6 +2,7 @@
     h1 Patient Processing Form
     .alert.alert-success.animate-show(role="alert" ng-show="successSwitchState") Form Successfully Submitted!
     form(name="processingForm" ng-show="isVisible").animate-show    
+        .col-xs-4
         .form-group(ng-repeat="category in categories", show-errors) 
             label.control-label {{category[0]}}
             br
