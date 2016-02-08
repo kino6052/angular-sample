@@ -15,7 +15,9 @@ import {CallTicket} from '../../sqldb';
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
+    console.log(entity);
     if (entity) {
+      
       res.status(statusCode).json(entity);
     }
   };
@@ -62,6 +64,19 @@ function handleError(res, statusCode) {
 export function index(req, res) {
   CallTicket.findAll()
     .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Gets a list of CallTickets for a Specific User
+export function filteredIndex(req, res) {
+  console.log("USER NAME: " + req.params.name)
+  CallTicket.findOne({
+    where: {
+        user: req.params.name
+    }
+  })
+    .then(() => {respondWithResult(res);} )
+    .then(handleEntityNotFound(res))
     .catch(handleError(res));
 }
 
