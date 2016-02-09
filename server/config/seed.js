@@ -46,25 +46,27 @@ Thing.sync()
 User.sync()
   .then(() => User.destroy({ where: {} }))
   .then(() => {
-    return User.bulkCreate([{
-      provider: 'local',
-      name: 'Test User',
-      email: 'test@example.com',
-      password: 'test'
-    }, {
-      provider: 'local',
-      role: 'admin',
-      name: 'Admin',
-      email: 'admin@example.com',
-      password: 'admin'
-    },
-    {
-      provider: 'local',
-      role: 'admin',
-      name: 'Kirill Novik',
-      email: 'kirill.novik.csci@gmail.com',
-      password: 'test'
-    }
+    return User.bulkCreate([
+      // {
+      //   provider: 'local',
+      //   name: 'Test User',
+      //   email: 'test@example.com',
+      //   password: 'test'
+      // }, {
+      //   provider: 'local',
+      //   role: 'admin',
+      //   name: 'Admin',
+      //   email: 'admin@example.com',
+      //   password: 'admin'
+      // },
+      // {
+      //   provider: 'local',
+      //   role: 'admin',
+      //   name: 'Kirill Novik',
+      //   email: 'kirill.novik.csci@gmail.com',
+      //   password: 'test'
+      // }
+
     ])
     .then(() => {
       console.log('finished populating users');

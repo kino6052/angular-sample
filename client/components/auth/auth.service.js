@@ -102,8 +102,11 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
 
       var value = (currentUser.hasOwnProperty('$promise')) ?
         currentUser.$promise : currentUser;
+
       return $q.when(value)
         .then(user => {
+          console.log(user);
+          //user.google = JSON.parse(user.google);
           safeCb(callback)(user);
           return user;
         }, () => {
@@ -112,6 +115,15 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
         });
     },
 
+
+    getCurrentAvatar(callback) {
+      if (arguments.length === 0) {
+
+        return JSON.parse(currentUser.google);
+      }
+
+      return "";
+    },
     /**
      * Check if a user is logged in
      *   (synchronous|asynchronous)
