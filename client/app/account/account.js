@@ -3,12 +3,6 @@
 angular.module('oxhnApp')
   .config(function($stateProvider) {
     $stateProvider
-      .state('login', {
-        url: '/login',
-        templateUrl: 'app/account/login/login.html',
-        controller: 'LoginController',
-        controllerAs: 'vm'
-      })
       .state('logout', {
         url: '/logout?referrer',
         referrer: 'main',
@@ -20,19 +14,6 @@ angular.module('oxhnApp')
           Auth.logout();
           $state.go(referrer);
         }
-      })
-      .state('signup', {
-        url: '/signup',
-        templateUrl: 'app/account/signup/signup.html',
-        controller: 'SignupController',
-        controllerAs: 'vm'
-      })
-      .state('settings', {
-        url: '/settings',
-        templateUrl: 'app/account/settings/settings.html',
-        controller: 'SettingsController',
-        controllerAs: 'vm',
-        authenticate: true
       });
   })
   .run(function($rootScope) {

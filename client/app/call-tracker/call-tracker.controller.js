@@ -1,16 +1,31 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('CallTrackerCtrl', function ($http, $scope, $timeout, Auth, callTracker, webService) {
-    
-    /* Initialize Scope Variables */
-    
-    $scope.getCurrentUser = Auth.getCurrentUser;
-    $scope.user = callTracker.user;
+  .controller('CallTrackerCtrl', function ($scope, $http, $timeout, Modal, Auth) {
+    console.log(JSON.parse(Auth.getCurrentUser().google));
     $scope.users = [];
+    $scope.getCurrentUser = function(){
+        try {
+            return Auth.getCurrentUser().profile.name;
+        }
+        catch (err)
+        {console.log(err)}
+        return '';
+    }
     
+    // Model
+    $scope.user = {
+        callType: 'Change',
+        outcome: 'Scheduled',
+        textarea: '',
+        callInitiated: moment().utc(),
+        ocFollowUp: '2',
+        user: $scope.getCurrentUser()
+    };
     
-    // Form Properties (Should be Part of Form Directive)
+    var followupDate = new Date();
+    
+    // Form Properties
     $scope.isVisible=true;
     $scope.successSwitchState=false;
     $scope.successSwitch=function(callback){
@@ -22,7 +37,7 @@ angular.module('oxhnApp')
         }
     };
     
-    $scope.click = ($event) => {
+    $scope.click = function($event){
         angular.element(
             angular.element(
                 angular.element($event.currentTarget).parent()
@@ -30,47 +45,51 @@ angular.module('oxhnApp')
         ).toggle('ng-show');
     }
     
-    /* Behaviour */
-    
-    /**
-     * Saves to the Call Log
-     * @param  {String} endpoint    - url of the endpoint to which POST request is sent
-     * @param  {Object} data        - data to be submitted
-     */
-    $scope.post = (endpoint, data, showErrorsFunction, resetErrorsFunction) => {
-        // Check for Errors and Display Error Messages
-        // TODO: Make a hook instead of binding to a scope variable.
-        // This way it can be abstracted into a service.
-        // For example a hook like 
-        //      showErrorsHook = showErrorsFunction (where the latter is a parameter that can be anything)
+    // Save User
+    $scope.save = function() {
         $scope.$broadcast('show-errors-check-validity');
-        // Prevent from Submitting in Case of Errors
         if ($scope.userForm.$invalid) { return; }
-        // Hide Form
-        //Form.hide();
-        // Save Entry to the Database
-        webService.post(endpoint, data, ()=>{}, ()=>{});
-        // Reset Error Messages
-        $scope.$broadcast('show-errors-reset');
-        // Show the Form
-        //Form.show();   
-    }
-    $scope.save = () => { $scope.post('/api/call-tickets', $scope.user) };
+        $scope.isVisible = false;
+        $scope.successSwitch();
+        if ($scope.user.ocFollowUp && $scope.user.outcome==="Followup"){
+            $scope.user.ocFollowUp = moment().add(Number($scope.user.ocFollowUp), 'days').utc()   
+        }
+        else {
+            try {
+                delete $scope.user.ocFollowUp;
+            } catch(error) {
+                console.log(error);
+            }
+        }
+        $http.post('/api/call-tickets', $scope.user).then(
+            function(data){
+                console.log(data);
+                $scope.user = {
+                    callType: 'Change',
+                    outcome: 'Scheduled',
+                    textarea: '',
+                    callInitiated: moment().utc(),
+                    ocFollowUp: '2',
+                    user: $scope.getCurrentUser()
+                };
+                $scope.$broadcast('show-errors-reset');
+                $timeout(()=>{$scope.successSwitch(()=>{$scope.isVisible=true;})}, 2000);
+            },
+            function(error){
+                console.log(error);
+            }
+        );
+    };
     
-    /**
-     * Gets the Call Log Data
-     * @param  {String} endpoint    - url of the endpoint to which GET request is sent
-     */
-    $scope.get = (endpoint) => {
-        // Set users to response data (Seems to be not safe to assign to a global variable)
-        // TODO: Find out how to do this without using outer scope variable
-        webService.get(endpoint, (response) => {$scope.users = Array.isArray(response.data)?response.data:[response.data]});
-    }
-    
-    $scope.getData = () => { 
-                    
-        var username = Auth.getCurrentUser().name;
-        $scope.get('/api/call-tickets/filtered/' + username);
-
-    }
+    // Save User
+    $scope.getData = function() {
+        $http.get('/api/call-tickets/filtered/' + Auth.getCurrentUser().name).then(
+            function(response){
+                $scope.users = response.data;
+            },
+            function(error){
+                console.log(error);
+            }
+        );
+    };
   });

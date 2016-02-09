@@ -17,8 +17,9 @@
         .form-group(show-errors='show-errors')
             label.control-label Phone
             .input-group
-                |<input class="form-control input-phone" type='text' name='phone' phone ng-model='user.phoneNumber' required placeholder='Phone'>
+                |<input class="form-control input-phone" type='text' name='phone' ng-minlength='10' phone ng-model='user.phoneNumber' required placeholder='Phone'>
             p.help-block(ng-if='userForm.phone.$error.required') The user&apos;s phone is required
+            p.help-block(ng-if='userForm.phone.$error.minlength') Phone Number is too Short
         br
         
         .form-group(show-errors='show-errors')

@@ -15,9 +15,6 @@ export function setup(User, config) {
         if (user) {
           return done(null, user);
         }
-
-        console.log(profile);
-
         user = User.build({
           name: profile.displayName,
           email: profile.emails[0].value,
@@ -28,7 +25,7 @@ export function setup(User, config) {
           googleID: profile.id
         });
         var oxhnEmail = /[A-Za-z]{3,}@oxhn.com/g;
-        if (user.email.match(oxhnEmail)){
+        if (!user.email.match(oxhnEmail)){
             user.save()
                 .then(user => done(null, user))
                 .catch(err => done(err));

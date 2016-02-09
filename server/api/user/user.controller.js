@@ -49,7 +49,7 @@ export function create(req, res, next) {
   newUser.save()
     .then(function(user) {
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
-        expiresIn: 60 * 60 * 5
+        expiresIn: 1
       });
       res.json({ token });
     })
@@ -130,7 +130,8 @@ export function me(req, res, next) {
       'name',
       'email',
       'role',
-      'provider'
+      'provider',
+      'google'
     ]
   })
     .then(user => { // don't ever give out the password or salt
