@@ -25,7 +25,8 @@ export function setup(User, config) {
           googleID: profile.id
         });
         var oxhnEmail = /[A-Za-z]{3,}@oxhn.com/g;
-        if (!user.email.match(oxhnEmail)){
+        
+        if (user.email.match(oxhnEmail)){
             user.save()
                 .then(user => done(null, user))
                 .catch(err => done(err));
