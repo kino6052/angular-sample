@@ -1,22 +1,18 @@
-
-header#banner.hero-unit
-    h1 'Allo, 'Allo!
-    p.lead Kick-start your next web app with Angular Fullstack
-    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
+div.jumbotron
+    h2 Welcome to the Oxhn Dashboard!
+    p Navigate through the App by Using the Top Navigation Menu
 
 .row
     .col-lg-12
-        h1.page-header Features:
-        ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in main.awesomeThings')
-            li
-                a(href='#', tooltip='{{thing.info}}')
-                    | {{thing.name}}
-                    button.close(type='button', ng-click='main.deleteThing(thing)') &times;
-    br
-    .col-lg-12
-        form.thing-form
-            label Syncs in realtime across clients
-            p.input-group
-            input.form-control(type='text', placeholder='Add a new thing here.', ng-model='main.newThing')
-            span.input-group-btn
-                button.btn.btn-primary(type='submit', ng-click='main.addThing()') Add New
+        h2 Features
+        |<div class="list-group">
+        |    <a href="#" class="list-group-item active">
+        |        <h4 class="list-group-item-heading">Keep a Record of the Calls</h4>
+        |        <p class="list-group-item-text">Keep a Record of the Calls.</p>
+        |    </a>
+        |    <a href="#" class="list-group-item">
+        |        <h4 class="list-group-item-heading">Process Daily Data</h4>
+        |        <p class="list-group-item-text">Process Daily Data</p>
+        |    </a>
+        |</div>
+                   

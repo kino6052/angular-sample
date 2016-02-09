@@ -1,5 +1,5 @@
 .container-fluid
-    h1 Patient Processing Form
+    h1 Daily Log
     .alert.alert-success.animate-show(role="alert" ng-show="successSwitchState") Form Successfully Submitted!
     form(name="processingForm" ng-show="isVisible", autocomplete="on").animate-show 
         .row
@@ -16,6 +16,6 @@
                 .form-group(show-errors)
                     label.control-label Additional Notes
                     textarea#comment.form-control(rows='5', ng-model='patientProcessingForm.notes', name='notes', required='required', placeholder='Put Your Comments Here...')
-    br
-    .button-group
-        button.btn.btn-primary(ng-click='submit()') Submit
+        br
+        .button-group
+            button.btn.btn-primary(ng-click='submit()') Submit
