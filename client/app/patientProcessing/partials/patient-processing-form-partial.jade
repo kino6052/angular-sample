@@ -1,7 +1,7 @@
 .container-fluid
     h1 Patient Processing Form
     .alert.alert-success.animate-show(role="alert" ng-show="successSwitchState") Form Successfully Submitted!
-    form(name="processingForm" ng-show="isVisible").animate-show 
+    form(name="processingForm" ng-show="isVisible", autocomplete="on").animate-show 
         .row
             .col-xs-4(ng-repeat="category in categories")  
                 .form-group(show-errors)                

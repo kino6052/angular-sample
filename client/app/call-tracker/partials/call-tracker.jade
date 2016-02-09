@@ -1,7 +1,8 @@
 .container-fluid
     h1 Call Tracker
+    img(src="{{googleImage.image.url}}")
     .alert.alert-success.animate-show(role="alert" ng-show="successSwitchState") Form Successfully Submitted!  
-    form.animate-show(name='userForm', novalidate='',ng-show="isVisible")
+    form.animate-show(name='userForm', novalidate='',ng-show="isVisible", autocomplete="on")
         .form-group(show-errors='show-errors')
             label.control-label First Name
             .input-group   
@@ -43,16 +44,22 @@
                 label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Scheduled'" value="Scheduled") Scheduled
                 label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Followup'" value="Followup") Follow-up
                 label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Insurance'" value="Insurance") Insurance
+                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Other'" value="Other") Other
             br
             div(class="btn-group" ng-if="user.outcome==='Followup'")
                 label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'2'" value="2") 2 Days
                 label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'5'" value="5") 5 Days
                 label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'7'" value="7") 7 Days
-          
-        .form-group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")  
-            label.control-label Insurance Issue    
-            textarea.form-control(rows='5',  ng-model='user.insurance', name='insurance', placeholder='How can we help?', required='')
-            p.help-block(ng-if='userForm.insurance.$error.required') This field is required
+            br
+            .form-group(show-errors='show-errors', ng-if="user.outcome==='Other'") 
+                label.control-label Other
+                textarea.form-control(rows='5', ng-model='user.outcomeOther', name='outcomeOther', placeholder='Please, Provide Information', required)
+                p.help-block(ng-if='userForm.outcomeOther.$error.required') This field is required
+            br
+            .form-group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")  
+                label.control-label Insurance Issue    
+                textarea.form-control(rows='5',  ng-model='user.insurance', name='insurance', placeholder='Please, Provide Explanation of the Issue', required='')
+                p.help-block(ng-if='userForm.insurance.$error.required') This field is required
         br
         
         .form-group(show-errors='show-errors')

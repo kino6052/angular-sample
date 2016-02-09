@@ -35,6 +35,7 @@ export default function(sequelize, DataTypes) {
       values: ['Scheduled', 'Follow-Up', 'Insurance-Issue'],
       allowNull: false
     },
+    outcomeOther: DataTypes.STRING,
     ocFollowUp: DataTypes.DATE,
     notes: {
       type: DataTypes.STRING,

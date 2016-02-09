@@ -20,8 +20,9 @@ html
             th Call Type (Other)
             th Followup
             th Outcome
-        
-        tbody(ng-repeat='ticket in users|filter:query' )  
+            th Outcome (Other)
+            
+        tbody(ng-repeat="ticket in users|filter:query|orderBy:'-_id'" )  
             tr(ng-click="click($event)" ng-show='true')
                 td {{ticket._id}}
                 td {{ticket.user}}
@@ -33,6 +34,7 @@ html
                 td {{ticket.callTypeOther}}
                 td {{ticket.ocFollowUp|dateFilter}}
                 td {{ticket.outcome}}
+                td {{ticket.outcomeOther}}
             tr.notes-show(style="display:none")
                 td(colspan="10") 
                     strong Notes:

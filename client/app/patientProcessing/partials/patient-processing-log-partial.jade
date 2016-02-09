@@ -19,7 +19,7 @@
                     span(class="{{'No Shows'|tableFilter}}")
                 th
                     span(class="{{'Canceled'|tableFilter}}")
-        tbody(ng-repeat='log in logs', )
+        tbody(ng-repeat="log in logs|orderBy:'-_id'" )
             tr(ng-click="click($event)")
                 td {{log.date|dateFilter}}
                 td {{log.user}}
