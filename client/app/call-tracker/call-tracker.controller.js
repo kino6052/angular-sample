@@ -20,6 +20,7 @@ angular.module('oxhnApp')
         textarea: '',
         callInitiated: moment().utc(),
         ocFollowUp: '2',
+        referal: 'TV',
         user: $scope.getCurrentUser()
     };
     
@@ -43,6 +44,29 @@ angular.module('oxhnApp')
                 angular.element($event.currentTarget).parent()
             ).children()[1]
         ).toggle('ng-show');
+    }
+    
+    // Dropdowns
+    $scope.resetReferals = function() {
+        $scope.user.tv = '';
+        $scope.user.newspaper = '';
+        $scope.user.doctorName = '';
+        $scope.user.patientName = '';
+    }
+    
+    $scope.updateReferal = function(value){
+        $scope.resetReferals();
+        $scope.user.referal = value;
+    }
+    
+    $scope.updateChannel = function(value){
+        $scope.resetReferals();
+        $scope.user.tv = value;
+    }
+    
+    $scope.updateNewspaper = function(value){
+        $scope.resetReferals();
+        $scope.user.newspaper = value;
     }
     
     // Save User
