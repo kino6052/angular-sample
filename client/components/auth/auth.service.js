@@ -26,11 +26,6 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
         password: password
       })
         .then(res => {
-          console.log("########################")
-          console.log("########################")
-          console.log("########################")
-          console.log(res)
-          return; // Don't let to login if user state is false  
           $cookies.put('token', res.data.token);
           currentUser = User.get();
           return currentUser.$promise;
@@ -86,6 +81,23 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
       return User.changePassword({ id: currentUser._id }, {
         oldPassword: oldPassword,
         newPassword: newPassword
+      }, function() {
+        return safeCb(callback)(null);
+      }, function(err) {
+        return safeCb(callback)(err);
+      }).$promise;
+    },
+    
+    /**
+     * Change password
+     *
+     * @param  {String}   oldPassword
+     * @param  {String}   newPassword
+     * @param  {Function} callback    - optional, function(error, user)
+     * @return {Promise}
+     */
+    changeState(user, callback) {
+      return User.changeState({ id: user._id }, {
       }, function() {
         return safeCb(callback)(null);
       }, function(err) {

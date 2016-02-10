@@ -25,6 +25,7 @@ export function isAuthenticated() {
       }
       validateJwt(req, res, next);
     })
+    
     // Attach user to request
     .use(function(req, res, next) {
       User.find({
@@ -35,6 +36,10 @@ export function isAuthenticated() {
         .then(user => {
           if (!user) {
             return res.status(401).end();
+          }
+          // Check if the user state to allow or forbid
+          if (!user.state) {
+              return res.status(403).end();
           }
           req.user = user;
           next();
