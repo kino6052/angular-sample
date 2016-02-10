@@ -6,6 +6,12 @@ navbar
     li.list-group-item(ng-repeat='user in admin.users')
       strong {{user.name}}
       br
-      span.text-muted {{user.email}}
-      a.trash(ng-click='admin.delete(user)')
-        span.glyphicon.glyphicon-trash.pull-right
+      span.text-muted {{user.email}} 
+      a.pull-right(ng-click='admin.switchState(user)')
+        span.glyphicon.glyphicon-check
+        | Turn Off/On
+      
+      a.trash.pull-right(ng-click='admin.delete(user)')
+        span.glyphicon.glyphicon-trash
+        | Delete
+      p Is Enabled: {{user.state}}

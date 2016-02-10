@@ -26,6 +26,11 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
         password: password
       })
         .then(res => {
+          console.log("########################")
+          console.log("########################")
+          console.log("########################")
+          console.log(res)
+          return; // Don't let to login if user state is false  
           $cookies.put('token', res.data.token);
           currentUser = User.get();
           return currentUser.$promise;
