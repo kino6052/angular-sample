@@ -58,14 +58,16 @@ angular.module('oxhnApp')
         $scope.$broadcast('show-errors-check-validity'); // Some fields are not set, turn on the red light
         if ($scope.processingForm.$invalid) { return; }
         $scope.isVisible=false;
-        $scope.successSwitch();  
+        
         $http.post('/api/patient-processings/', $scope.patientProcessingForm).then( 
             function(response){
+                $scope.successSwitch();  
                 $scope.$broadcast('show-errors-reset');
                 $timeout(()=>{$scope.successSwitch($scope.isVisible=true);}, 2000);
                 $scope.reset();  
             },
             function(error){
+                $scope.isVisible=true;
                 console.log(error);
                 alert("Something went wrong...");
             }

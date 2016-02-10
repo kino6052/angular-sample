@@ -4,15 +4,16 @@ angular.module('oxhnApp')
   .controller('CallTrackerCtrl', function ($scope, $http, $timeout, Modal, Auth) {
     console.log(JSON.parse(Auth.getCurrentUser().google));
     $scope.users = [];
+    $scope.role = 'user';
     $scope.getCurrentUser = function(){
         try {
-            console.log(Auth.getCurrentUser());
             return Auth.getCurrentUser()._id;
         }
         catch (err)
         {console.log(err)}
         return '';
     }
+
     
     // Model
     $scope.user = {
@@ -109,13 +110,26 @@ angular.module('oxhnApp')
     
     // Save User
     $scope.getData = function() {
-        $http.get('/api/call-tickets/filtered/' + $scope.getCurrentUser()).then(
-            function(response){
-                $scope.users = response.data;
-            },
-            function(error){
-                console.log(error);
-            }
-        );
+        console.log($scope.role);
+        
+        if ($scope.role === "admin"){
+           $http.get('/api/call-tickets/regular/').then(
+                function(response){
+                    $scope.users = response.data;
+                },
+                function(error){
+                    console.log(error);
+                }
+            ); 
+        } else {
+            $http.get('/api/call-tickets/filtered/' + $scope.getCurrentUser()).then(
+                function(response){
+                    $scope.users = response.data;
+                },
+                function(error){
+                    console.log(error);
+                }
+            );
+        }
     };
   });
