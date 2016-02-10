@@ -12,7 +12,16 @@ angular.module('oxhnApp')
         catch (err)
         {console.log(err)}
         return '';
+    };
+    $scope.getCurrentRole = function(){
+        try {
+            return Auth.getCurrentUser().role;
+        }
+        catch (err)
+        {console.log(err)}
+        return '';
     }
+
 
     
     // Model
@@ -110,9 +119,9 @@ angular.module('oxhnApp')
     
     // Save User
     $scope.getData = function() {
-        console.log($scope.role);
+        console.log($scope.getCurrentRole());
         
-        if ($scope.role === "admin"){
+        if ($scope.getCurrentRole() === "admin"){
            $http.get('/api/call-tickets/regular/').then(
                 function(response){
                     $scope.users = response.data;
