@@ -32,9 +32,16 @@ html
                 td {{ticket.ocFollowUp|dateFilter}}
                 td {{ticket.outcome}}
             tr.notes-show(style="display:none")
-                td(colspan="5") 
+                td(colspan="3") 
                     strong Notes:
                     p {{ticket.notes}}
+                td(colspan="2")
+                    strong Referal:
+                    p {{ticket.referal}}
+                    p(ng-if="ticket.tv") {{ticket.tv}}
+                    p(ng-if="ticket.newspaper") {{ticket.newspaper}}
+                    p(ng-if="ticket.doctorName") {{ticket.doctorName}}
+                    p(ng-if="ticket.patientName") {{ticket.patientName}}
                 td(colspan="2") 
                     strong(ng-show="ticket.callTypeOther") Call Type (Other):
                     p(ng-show="ticket.callTypeOther") {{ticket.callTypeOther}}

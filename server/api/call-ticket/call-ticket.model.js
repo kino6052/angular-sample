@@ -41,7 +41,17 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    user: DataTypes.STRING,
-    allowNull: false
+    user: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    referal: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    tv: DataTypes.STRING,
+    newspaper: DataTypes.STRING,
+    doctorName: DataTypes.STRING,
+    patientName: DataTypes.STRING
   });
 }
