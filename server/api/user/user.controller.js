@@ -30,7 +30,8 @@ export function index(req, res) {
       'name',
       'email',
       'role',
-      'provider'
+      'provider',
+      'state'
     ]
   })
     .then(users => {
@@ -116,6 +117,28 @@ export function changePassword(req, res, next) {
 }
 
 /**
+ * Change a users state
+ */
+export function changeState(req, res, next) {
+  var userId = req.params.id;
+
+  User.find({
+    where: {
+        _id: userId
+    }
+    })
+    .then(user => {
+        user.state = !user.state;
+        console.log(user.state);
+        return user.save()
+          .then(() => {
+            console.log(user);
+            res.status(204).end();
+          })
+    });
+}
+
+/**
  * Get my info
  */
 export function me(req, res, next) {
@@ -131,7 +154,8 @@ export function me(req, res, next) {
       'email',
       'role',
       'provider',
-      'google'
+      'google',
+      'state'
     ]
   })
     .then(user => { // don't ever give out the password or salt

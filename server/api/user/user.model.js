@@ -40,8 +40,11 @@ module.exports = function(sequelize, DataTypes) {
     salt: DataTypes.STRING,
     google: DataTypes.TEXT,
     googleID: DataTypes.STRING,
-    github: DataTypes.TEXT
-
+    github: DataTypes.TEXT,
+    state: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    }
   }, {
 
     /**

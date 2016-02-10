@@ -58,7 +58,8 @@ User.sync()
          role: 'admin',
          name: 'Admin',
          email: 'admin@example.com',
-         password: 'admin'
+         password: 'admin',
+         state: true
       }
       // {
       //   provider: 'local',

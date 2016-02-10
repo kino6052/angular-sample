@@ -12,6 +12,12 @@ function UserResource($resource) {
         controller: 'password'
       }
     },
+    changeState: {
+      method: 'PUT',
+      params: {
+        controller: 'state'
+      }
+    },
     get: {
       method: 'GET',
       params: {
