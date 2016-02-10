@@ -21,6 +21,7 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarController')
         |  </ul>
         |</li>
 
+
         |<li class="dropdown" ng-show='nav.isLoggedIn()'>
         |  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-file"></span> Daily Log <span class="caret"></span></a>
         |  <ul class="dropdown-menu">
@@ -36,8 +37,8 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarController')
         li(ng-hide='nav.isLoggedIn()', ui-sref-active='active')
           a(ui-sref="login") Login
           
-        li(ng-hide='nav.isLoggedIn()', ui-sref-active='active')
-          oauth-buttons(classes='')
+        //li(ng-hide='nav.isLoggedIn()', ui-sref-active='active')
+        //  oauth-buttons(classes='')
 
         li(ng-show='nav.isLoggedIn()')
           img(ng-src='{{ nav.googleURL().image.url }}')

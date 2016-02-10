@@ -4,14 +4,25 @@ angular.module('oxhnApp')
   .controller('CallTrackerCtrl', function ($scope, $http, $timeout, Modal, Auth) {
     console.log(JSON.parse(Auth.getCurrentUser().google));
     $scope.users = [];
+    $scope.role = 'user';
     $scope.getCurrentUser = function(){
         try {
-            return Auth.getCurrentUser().profile.name;
+            return Auth.getCurrentUser()._id;
+        }
+        catch (err)
+        {console.log(err)}
+        return '';
+    };
+    $scope.getCurrentRole = function(){
+        try {
+            return Auth.getCurrentUser().role;
         }
         catch (err)
         {console.log(err)}
         return '';
     }
+
+
     
     // Model
     $scope.user = {
@@ -74,7 +85,7 @@ angular.module('oxhnApp')
         $scope.$broadcast('show-errors-check-validity');
         if ($scope.userForm.$invalid) { return; }
         $scope.isVisible = false;
-        $scope.successSwitch();
+        
         if ($scope.user.ocFollowUp && $scope.user.outcome==="Followup"){
             $scope.user.ocFollowUp = moment().add(Number($scope.user.ocFollowUp), 'days').utc()   
         }
@@ -87,33 +98,47 @@ angular.module('oxhnApp')
         }
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
-                console.log(data);
+                $scope.successSwitch();
                 $scope.user = {
                     callType: 'Change',
                     outcome: 'Scheduled',
                     textarea: '',
                     callInitiated: moment().utc(),
                     ocFollowUp: '2',
-                    user: $scope.getCurrentUser()
+                    user: $scope.getCurrentUser()._id
                 };
                 $scope.$broadcast('show-errors-reset');
                 $timeout(()=>{$scope.successSwitch(()=>{$scope.isVisible=true;})}, 2000);
             },
             function(error){
-                console.log(error);
+                alert("Something Went Wrong...")
+                $scope.isVisible=true;
             }
         );
     };
     
     // Save User
     $scope.getData = function() {
-        $http.get('/api/call-tickets/filtered/' + Auth.getCurrentUser().name).then(
-            function(response){
-                $scope.users = response.data;
-            },
-            function(error){
-                console.log(error);
-            }
-        );
+        console.log($scope.getCurrentRole());
+        
+        if ($scope.getCurrentRole() === "admin"){
+           $http.get('/api/call-tickets/regular/').then(
+                function(response){
+                    $scope.users = response.data;
+                },
+                function(error){
+                    console.log(error);
+                }
+            ); 
+        } else {
+            $http.get('/api/call-tickets/filtered/' + $scope.getCurrentUser()).then(
+                function(response){
+                    $scope.users = response.data;
+                },
+                function(error){
+                    console.log(error);
+                }
+            );
+        }
     };
   });

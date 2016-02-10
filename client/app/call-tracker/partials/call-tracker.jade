@@ -12,7 +12,7 @@
         .form-group(show-errors='show-errors')
             label.control-label Last Name
             .input-group 
-                input.form-control(type='text', name='lastName', ng-model='user.lastName', required='', placeholder='Last Name')     
+                input.form-control(type='text', name='lastName', ng-model='user.lastName', required='', placeholder='Last Name' numberdirective)     
             p.help-block(ng-if='userForm.lastName.$error.required') The user&apos;s name is required
 
         .form-group(show-errors='show-errors')
