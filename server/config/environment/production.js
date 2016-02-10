@@ -19,5 +19,6 @@ module.exports = {
     options: {
       dialect: 'mysql'
     }
-  }
+  },
+  seedDB: true
 };
