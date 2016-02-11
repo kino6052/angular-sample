@@ -39,6 +39,12 @@ angular.module('oxhnApp')
         $scope.user = user;
     };
     $scope.initiateUser();
+    
+    // Resetting Forms
+    $scope.$on('reset-call-type', function(){
+    });
+    $scope.$on('reset-outcome', function(){
+    });
     // Form Properties
     $scope.isVisible=true;
     $scope.successSwitchState=false;
@@ -64,45 +70,55 @@ angular.module('oxhnApp')
         switch (section) {
             case 'callType':
                 $scope.user.referral = '';
-                $scope.resetReferrals();
+                $scope.resetCallType();
                 break;
             case 'outcome':
                 $scope.resetOutcome();
                 break;
             default:
                 break;
-        }
-        
+        }  
     }
     
-    $scope.resetReferrals = function() {
-        $scope.user.tv = '';
-        $scope.user.newspaper = '';
+    
+    $scope.resetCallType = function() {
         $scope.user.doctorName = '';
+        $scope.user.newspaper = '';
         $scope.user.patientName = '';
+        $scope.user.referral = '';
         $scope.user.referralOther = '';
+        $scope.resetOutcome();
     }
     
     $scope.resetOutcome = function() {
-        $scope.user.referralRequired = '';
-        $scope.user.ocFollowUp = '';
+        $scope.user.followupDate = '';
         $scope.user.insurance = '';
+        $scope.user.ocFollowUp = '2';
+        $scope.user.outcome = 'New';
         $scope.user.outcomeOther = '';
+        $scope.user.referralRequired = false;
+        $scope.user.location = '';
     }
     
     $scope.updateReferral = function(value){
-        $scope.resetReferrals();
+        $scope.resetCallType();
         $scope.user.referral = value;
     }
     
     $scope.updateChannel = function(value){
-        $scope.resetReferrals();
+        $scope.resetCallType();
+        $scope.user.referral = 'TV';
         $scope.user.tv = value;
     }
     
     $scope.updateNewspaper = function(value){
-        $scope.resetReferrals();
+        $scope.resetCallType();
+        $scope.user.referral = 'Newspaper';
         $scope.user.newspaper = value;
+    }
+    
+    $scope.updateLocation = function(value){
+        $scope.user.location = value;
     }
     
     // Save User
