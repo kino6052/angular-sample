@@ -53,6 +53,7 @@ angular.module('oxhnApp')
                 followupDate: '',
                 insurance: '',
                 lastName: '',
+                location: '',
                 newspaper: '',
                 notes: '',
                 ocFollowUp: '2',
