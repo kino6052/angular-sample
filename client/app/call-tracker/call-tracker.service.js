@@ -44,13 +44,26 @@ angular.module('oxhnApp')
             opened: false
         }
         return {
-            user: {
+            user:  {
+                callInitiated: '',
                 callType: 'Change',
-                outcome: 'Scheduled',
-                textarea: '',
-                callInitiated: moment().utc(),
+                callTypeOther: '',
+                doctorName: '',
+                firstName: '',
+                followupDate: '',
+                insurance: '',
+                lastName: '',
+                newspaper: '',
+                notes: '',
                 ocFollowUp: '2',
-                user: Auth.getCurrentUser().name
+                outcome: 'New',
+                outcomeOther: '',
+                patientName: '',
+                phoneNumber: '',
+                referral: '',
+                referralOther: '',
+                tv: '',
+                user: ''
             },
             getCurrentUser: this.getCurrentUser,
             today: this.today,

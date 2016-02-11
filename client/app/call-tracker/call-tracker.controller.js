@@ -25,27 +25,20 @@ angular.module('oxhnApp')
 
     $scope.CallTracker = CallTracker;
     $scope.setFollowupDate = function(value){
-        $scope.user.ocFollowUp = moment().add(parseInt(value), 'days').utc()
+        $scope.user.ocFollowUp = moment().add(parseInt(value), 'days').utc();
     }
     $scope.getFollowupDate = function(value){
-        $scope.user.ocFollowUp = moment(value).utc();
-        console.log(value);
+        $scope.user.ocFollowUp = moment(value.toUTCString()).utc();
+        console.log(value.toUTCString());
     }
-    // Model
-    $scope.user = {
-        firstName: '',
-        lastName: '',
-        phone: '',
-        callType: 'Change',
-        outcome: 'Scheduled',
-        callInitiated: moment().utc(),
-        ocFollowUp: '2',
-        ocFollowupCalendar: '',
-        textarea: '',
-        user: $scope.getCurrentUser(),
-        followupDate: ''
+    // Model 
+    $scope.initiateUser = function(){
+        var user = CallTracker.user;
+        user.user = $scope.getCurrentUser();
+        user.callInitiated = moment().utc();
+        $scope.user = user;
     };
-    
+    $scope.initiateUser();
     // Form Properties
     $scope.isVisible=true;
     $scope.successSwitchState=false;
@@ -93,7 +86,6 @@ angular.module('oxhnApp')
     $scope.resetOutcome = function() {
         $scope.user.referralRequired = '';
         $scope.user.ocFollowUp = '';
-        $scope.user.ocFollowUpCalendar = '';
         $scope.user.insurance = '';
         $scope.user.outcomeOther = '';
     }
@@ -120,7 +112,7 @@ angular.module('oxhnApp')
         $scope.isVisible = false;
         
         if ($scope.user.ocFollowUp && $scope.user.outcome==="Followup"){
-            $scope.user.ocFollowUp = moment().add(Number($scope.user.ocFollowUp), 'days').utc()   
+            $scope.user.ocFollowUp = moment().add(Number($scope.user.ocFollowUp), 'days').utc();   
         }
         else {
             try {
@@ -132,14 +124,7 @@ angular.module('oxhnApp')
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
                 $scope.successSwitch();
-                $scope.user = {
-                    callType: 'Change',
-                    outcome: 'Scheduled',
-                    textarea: '',
-                    callInitiated: moment().utc(),
-                    ocFollowUp: '2',
-                    user: $scope.getCurrentUser()._id
-                };
+                $scope.initiateUser();
                 $scope.$broadcast('show-errors-reset');
                 $timeout(()=>{$scope.successSwitch(()=>{$scope.isVisible=true;})}, 2000);
             },
