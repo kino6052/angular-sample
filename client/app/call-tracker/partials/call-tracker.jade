@@ -129,13 +129,15 @@
                                 label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Rescheduled'" value="Rescheduled" ng-click="updateForm('outcome')" ng-if="user.callType==='Change'") Rescheduled
                                 label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Followup'" value="Followup" ng-click="updateForm('outcome')") Follow-up
                                 label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Insurance'" value="Insurance" ng-click="updateForm('outcome')" ng-if="user.callType!=='Billing'") Insurance
-                                label(class="btn btn-primary" ng-click="updateForm('outcome')" ng-if="user.callType==='New' && user.outcome==='Scheduled'" disabled) Referral?
-                                div(class="btn-group" ng-if="user.callType==='New' && user.outcome==='Scheduled'")
-                                    label(class="btn btn-success" ng-model="user.referralRequired"  btn-radio="true" value="true") Yes
-                                    label(class="btn btn-success" ng-model="user.referralRequired"  btn-radio="false" value="false") No
+                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Referral'" value="Referral" ng-click="updateForm('outcome')" ng-if="user.callType==='New'") Referral
                                 label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Other'" value="Other" ng-click="updateForm('outcome')"  ng-if="user.callType!=='Billing'") Other
-                            br
-                            
+                                br
+                            .form-group(ng-if="user.callType==='New' && user.outcome==='Scheduled'")
+                                label.control-label Referral Required?
+                                br
+                                div(class="btn-group")
+                                    label(class="btn btn-primary" ng-model="user.referralRequired"  btn-radio="true" value="true") Yes
+                                    label(class="btn btn-primary" ng-model="user.referralRequired"  btn-radio="false" value="false") No
                             .form-group(show-errors='show-errors' ng-if="user.referralRequired===true")
                                 label.control-label Provide Doctor's Information
                                 br
