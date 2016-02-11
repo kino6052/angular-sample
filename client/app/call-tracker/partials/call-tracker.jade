@@ -136,15 +136,15 @@
             div(ng-if="user.outcome==='Followup'")
                 br
                 div(class="btn-group")
-                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'0'" value="0") Immediate (Escalated)
-                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'2'" value="2") 2 Days
-                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'5'" value="5") 5 Days
-                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'7'" value="7") 7 Days
-                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'10'" value="10") Other
+                    label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'0'" value="0" ng-click="setFollowupDate('0')") Immediate (Escalated)
+                    label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'2'" value="2" ng-click="setFollowupDate('2')") 2 Days
+                    label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'5'" value="5" ng-click="setFollowupDate('5')") 5 Days
+                    label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'7'" value="7" ng-click="setFollowupDate('7')") 7 Days
+                    label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'10'" value="'10'") Other
                 br
-            div(ng-if="user.ocFollowUp==='10'")
+            div(ng-if="user.followupDate==='10'")
                 p.input-group
-                input(type="text" class="form-control" uib-datepicker-popup="{{CallTracker.format}}" ng-model="CallTracker.dt" is-open="CallTracker.popup.opened" min-date="CallTracker.minDate" max-date="CallTracker.maxDate" datepicker-options="CallTracker.dateOptions" date-disabled="CallTracker.disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats")
+                input(type="text" class="form-control" ng-blur="getFollowupDate(CallTracker.dt)" uib-datepicker-popup="{{CallTracker.format}}" ng-model="CallTracker.dt" is-open="CallTracker.popup.opened" min-date="CallTracker.minDate" max-date="CallTracker.maxDate" datepicker-options="CallTracker.dateOptions" date-disabled="CallTracker.disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats")
                 span.input-group-btn
                     button(type="button" class="btn btn-default" ng-click="CallTracker.open()")
                         i.glyphicon.glyphicon-calendar

@@ -2,6 +2,7 @@
 
 angular.module('oxhnApp')
   .controller('CallTrackerCtrl', function ($scope, $http, $timeout, CallTracker, Auth) {
+    // Calendar 
     $scope.users = [];
     $scope.role = 'user';
     $scope.getCurrentUser = function(){
@@ -21,9 +22,15 @@ angular.module('oxhnApp')
         return '';
     }
 
-    // Calendar
+
     $scope.CallTracker = CallTracker;
-    
+    $scope.setFollowupDate = function(value){
+        $scope.user.ocFollowUp = moment().add(parseInt(value), 'days').utc()
+    }
+    $scope.getFollowupDate = function(value){
+        $scope.user.ocFollowUp = moment(value).utc();
+        console.log(value);
+    }
     // Model
     $scope.user = {
         firstName: '',
@@ -35,7 +42,8 @@ angular.module('oxhnApp')
         ocFollowUp: '2',
         ocFollowupCalendar: '',
         textarea: '',
-        user: $scope.getCurrentUser()
+        user: $scope.getCurrentUser(),
+        followupDate: ''
     };
     
     // Form Properties
