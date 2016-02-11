@@ -142,12 +142,15 @@
                     label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'7'" value="7" ng-click="setFollowupDate('7')") 7 Days
                     label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'10'" value="'10'") Other
                 br
-            div(ng-if="user.followupDate==='10'")
-                p.input-group
-                input(type="text" class="form-control" ng-blur="getFollowupDate(CallTracker.dt)" uib-datepicker-popup="{{CallTracker.format}}" ng-model="CallTracker.dt" is-open="CallTracker.popup.opened" min-date="CallTracker.minDate" max-date="CallTracker.maxDate" datepicker-options="CallTracker.dateOptions" date-disabled="CallTracker.disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats")
-                span.input-group-btn
-                    button(type="button" class="btn btn-default" ng-click="CallTracker.open()")
-                        i.glyphicon.glyphicon-calendar
+            div.row(ng-if="user.followupDate==='10'")
+                br
+                div.col-xs-2
+                    p.input-group
+                        input(type="text" class="form-control" ng-blur="getFollowupDate(CallTracker.dt)" uib-datepicker-popup="{{CallTracker.format}}" ng-model="CallTracker.dt" is-open="CallTracker.popup.opened" min-date="CallTracker.minDate" max-date="CallTracker.maxDate" datepicker-options="CallTracker.dateOptions" date-disabled="CallTracker.disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats")
+                        span.input-group-btn
+                            button(type="button" class="btn btn-default" ng-click="CallTracker.open()")
+                                i.glyphicon.glyphicon-calendar
+                br
             .form-group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")
                 br  
                 label.control-label Insurance Issue    
