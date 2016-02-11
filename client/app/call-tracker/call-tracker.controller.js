@@ -110,17 +110,6 @@ angular.module('oxhnApp')
         $scope.$broadcast('show-errors-check-validity');
         if ($scope.userForm.$invalid) { return; }
         $scope.isVisible = false;
-        
-        if ($scope.user.ocFollowUp && $scope.user.outcome==="Followup"){
-            $scope.user.ocFollowUp = moment().add(Number($scope.user.ocFollowUp), 'days').utc();   
-        }
-        else {
-            try {
-                delete $scope.user.ocFollowUp;
-            } catch(error) {
-                console.log(error);
-            }
-        }
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
                 $scope.successSwitch();
