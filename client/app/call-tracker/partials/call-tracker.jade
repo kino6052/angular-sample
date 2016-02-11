@@ -21,29 +21,38 @@
                 |<input class="form-control input-phone" type='text' name='phone' ng-minlength='14' phone ng-model='user.phoneNumber' required placeholder='Phone'>
             p.help-block(ng-if='userForm.phone.$error.required') The user&apos;s phone is required
             p.help-block(ng-if='userForm.phone.$error.minlength') Phone Number is too Short
-        br
         
-        .form-group(show-errors='show-errors')
+        .form-group
+            label.control-label How Can We Help?
+            br
+            div(class="btn-group")
+                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'New'" value="New" ng-click="updateForm('callType')") New Patient
+                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Change'" value="Change" ng-click="updateForm('callType')") Change
+                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Cancel'" value="Cancel" ng-click="updateForm('callType')") Cancel
+                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Billing'" value="Billing" ng-click="updateForm('callType')") Billing
+                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Other'" value="Other" ng-click="updateForm('callType')") Other
+            br
+        div(ng-if="user.callType==='New'")
             label.control-label How did You Hear about Us?
-        
-        div.btn-group(uib-dropdown)
-            button.btn.btn-primary(type="button" uib-dropdown-toggle) {{user.referal}}
-                span.caret
-            ul.dropdown-menu(uib-dropdown-menu, role="menu")
-                li(role="menuitem")
-                    a(ng-click="updateReferal('TV')") TV
-                li(role="menuitem")
-                    a(ng-click="updateReferal('Newspaper')") Newspaper
-                li(role="menuitem")
-                    a(ng-click="updateReferal('Doctor')") Doctor Referal
-                li(role="menuitem")
-                    a(ng-click="updateReferal('Online')") Online
-                li(role="menuitem")
-                    a(ng-click="updateReferal('Patient')") Patient
-        br
-        br
-        
-        div(ng-if="user.referal==='TV'")
+            br
+            div.btn-group(uib-dropdown ng-init="user.referral='TV'")
+                button.btn.btn-primary(type="button" ng-model="user.referral" uib-dropdown-toggle) {{user.referral || 'TV'}}
+                    span.caret
+                ul.dropdown-menu(uib-dropdown-menu, role="menu")
+                    li(role="menuitem")
+                        a(ng-click="updateReferral('TV')") TV
+                    li(role="menuitem")
+                        a(ng-click="updateReferral('Newspaper')") Newspaper
+                    li(role="menuitem")
+                        a(ng-click="updateReferral('Doctor')") Doctor Referral
+                    li(role="menuitem")
+                        a(ng-click="updateReferral('Online')") Online
+                    li(role="menuitem")
+                        a(ng-click="updateReferral('Patient')") Patient
+                    li(role="menuitem")
+                        a(ng-click="updateReferral('Other')") Other
+            br
+        div(ng-if="user.referral==='TV'")
             label.control-label What Channel?
             br
             div.btn-group(uib-dropdown)
@@ -60,10 +69,11 @@
                         a(ng-click="updateChannel('Ch. 13 KOLD')") Ch. 13 (KOLD)
                     li(role="menuitem")
                         a(ng-click="updateChannel('Ch. 15 ABC')") Ch. 15 (ABC)
-            br
+                    li(role="menuitem")
+                        a(ng-click="updateChannel('Unknown')") Unknown
             br   
         
-        .form-group(show-errors='show-errors' ng-if="user.referal==='Newspaper'")
+        .form-group(ng-if="user.referral==='Newspaper'")
             label.control-label What Newspaper?
             br
             div.btn-group(uib-dropdown)
@@ -74,70 +84,86 @@
                         a(ng-click="updateNewspaper('AZ Republic - Valley Newspaper')") AZ Republic - Valley Newspaper
                     li(role="menuitem")
                         a(ng-click="updateNewspaper('AZ Daily Star - Tucson Newspaper')") AZ Daily Star - Tucson Newspaper
-            br
+                    li(role="menuitem")
+                        a(ng-click="updateNewspaper('Unknown')") Unknown
             br
 
-         .form-group(show-errors='show-errors' ng-if="user.referal==='Doctor'")
+        .form-group(show-errors='show-errors' ng-if="user.referral==='Doctor'")
             label.control-label What is the Doctor's Name?
             br
             .input-group   
                 input.form-control(type='text', name='doctorName', ng-model='user.doctorName', required='', placeholder="Doctor's Name")      
             p.help-block(ng-if='userForm.doctorName.$error.required') This field is Required
-            br
-            br   
+            br  
         
-        .form-group(show-errors='show-errors' ng-if="user.referal==='Patient'")
+        .form-group(show-errors='show-errors' ng-if="user.referral==='Patient'")
             label.control-label What is the Patient's Name?
             br
             .input-group   
-                input.form-control(type='text', name='patientName', ng-model='user.patientName', required='', placeholder="Patient's Name")      
+                input.form-control(type='text', name='patientName', ng-model='user.patientName', required='', placeholder="Patient's Name" )      
             p.help-block(ng-if='userForm.patientName.$error.required') This field is Required
-            br
-            br   
+            br 
         
-        .form-group(show-errors='show-errors')
-            label.control-label How Can We Help?
-            br
-            div(class="btn-group")
-                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Change'" value="Change") Change
-                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Cancel'" value="Cancel") Cancel
-                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Other'" value="Other") Other
-            br
         .form-group(show-errors='show-errors', ng-if="user.callType==='Other'") 
             label.control-label Other
             textarea.form-control(rows='5', ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required)
             p.help-block(ng-if='userForm.other.$error.required') This field is required
-        br
-
-        .form-group(show-errors='show-errors')
+            
+        .form-group
             label.control-label What was the Result of the Call?
             br
             div(class="btn-group")
-                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Scheduled'" value="Scheduled") Scheduled
-                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Followup'" value="Followup") Follow-up
-                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Insurance'" value="Insurance") Insurance
-                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Other'" value="Other") Other
+                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Scheduled'" value="Scheduled" ng-click="updateForm('outcome')") Scheduled
+                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Followup'" value="Followup" ng-click="updateForm('outcome')") Follow-up
+                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Insurance'" value="Insurance" ng-click="updateForm('outcome')") Insurance
+                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Other'" value="Other" ng-click="updateForm('outcome')") Other
             br
-            div(class="btn-group" ng-if="user.outcome==='Followup'")
-                label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'2'" value="2") 2 Days
-                label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'5'" value="5") 5 Days
-                label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'7'" value="7") 7 Days
-            br
-            .form-group(show-errors='show-errors', ng-if="user.outcome==='Other'") 
-                label.control-label Other
-                textarea.form-control(rows='5', ng-model='user.outcomeOther', name='outcomeOther', placeholder='Please, Provide Information', required)
-                p.help-block(ng-if='userForm.outcomeOther.$error.required') This field is required
-            br
-            .form-group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")  
+            div(ng-if="user.outcome==='Scheduled'")
+                br
+                div(class="btn-group")
+                    label(class="btn btn-primary" ng-model="user.referralRequired"  btn-radio="true" value="true") Yes
+                    label(class="btn btn-primary" ng-model="user.referralRequired"  btn-radio="false" value="false") No
+                br
+            
+            .form-group(show-errors='show-errors' ng-if="user.referralRequired===true")
+                label.control-label Provide Doctor's Name
+                br
+                .input-group   
+                    input.form-control(type='text', name='doctorReferral', ng-model='user.doctorReferral', required='', placeholder="Doctor's Information" )      
+                p.help-block(ng-if='userForm.doctorReferral.$error.required') This field is Required
+                br 
+                
+            div(ng-if="user.outcome==='Followup'")
+                br
+                div(class="btn-group")
+                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'0'" value="0") Immediate (Escalated)
+                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'2'" value="2") 2 Days
+                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'5'" value="5") 5 Days
+                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'7'" value="7") 7 Days
+                    label(class="btn btn-primary" ng-model="user.ocFollowUp"  btn-radio="'10'" value="10") Other
+                br
+            div(ng-if="user.ocFollowUp==='10'")
+                p.input-group
+                input(type="text" class="form-control" uib-datepicker-popup="{{CallTracker.format}}" ng-model="CallTracker.dt" is-open="CallTracker.popup.opened" min-date="CallTracker.minDate" max-date="CallTracker.maxDate" datepicker-options="CallTracker.dateOptions" date-disabled="CallTracker.disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats")
+                span.input-group-btn
+                    button(type="button" class="btn btn-default" ng-click="CallTracker.open()")
+                        i.glyphicon.glyphicon-calendar
+            .form-group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")
+                br  
                 label.control-label Insurance Issue    
                 textarea.form-control(rows='5',  ng-model='user.insurance', name='insurance', placeholder='Please, Provide Explanation of the Issue', required='')
                 p.help-block(ng-if='userForm.insurance.$error.required') This field is required
-        br
+            .form-group(show-errors='show-errors', ng-if="user.outcome==='Other'")
+                br 
+                label.control-label Other
+                textarea.form-control(rows='5', ng-model='user.outcomeOther', name='outcomeOther', placeholder='Please, Provide Information', required)
+                p.help-block(ng-if='userForm.outcomeOther.$error.required') This field is required
+
         
         .form-group(show-errors='show-errors')
             label.control-label Additional Notes
             textarea#comment.form-control(rows='5', ng-model='user.notes', name='notes', required='required', placeholder='Put Your Comments Here...')
             p.help-block(ng-if='userForm.notes.$error.required') The comments are required
-        br
+            br
         .button-group
             button.btn.btn-primary(ng-click='save()') Submit

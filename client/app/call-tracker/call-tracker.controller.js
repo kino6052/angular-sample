@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('CallTrackerCtrl', function ($scope, $http, $timeout, Modal, Auth) {
-    console.log(JSON.parse(Auth.getCurrentUser().google));
+  .controller('CallTrackerCtrl', function ($scope, $http, $timeout, CallTracker, Auth) {
     $scope.users = [];
     $scope.role = 'user';
     $scope.getCurrentUser = function(){
@@ -22,20 +21,22 @@ angular.module('oxhnApp')
         return '';
     }
 
-
+    // Calendar
+    $scope.CallTracker = CallTracker;
     
     // Model
     $scope.user = {
+        firstName: '',
+        lastName: '',
+        phone: '',
         callType: 'Change',
         outcome: 'Scheduled',
-        textarea: '',
         callInitiated: moment().utc(),
         ocFollowUp: '2',
-        referal: 'TV',
+        ocFollowupCalendar: '',
+        textarea: '',
         user: $scope.getCurrentUser()
     };
-    
-    var followupDate = new Date();
     
     // Form Properties
     $scope.isVisible=true;
@@ -58,25 +59,49 @@ angular.module('oxhnApp')
     }
     
     // Dropdowns
-    $scope.resetReferals = function() {
+    $scope.updateForm = function(section){
+        switch (section) {
+            case 'callType':
+                $scope.user.referral = '';
+                $scope.resetReferrals();
+                break;
+            case 'outcome':
+                $scope.resetOutcome();
+                break;
+            default:
+                break;
+        }
+        
+    }
+    
+    $scope.resetReferrals = function() {
         $scope.user.tv = '';
         $scope.user.newspaper = '';
         $scope.user.doctorName = '';
         $scope.user.patientName = '';
+        $scope.user.referralOther = '';
     }
     
-    $scope.updateReferal = function(value){
-        $scope.resetReferals();
-        $scope.user.referal = value;
+    $scope.resetOutcome = function() {
+        $scope.user.referralRequired = '';
+        $scope.user.ocFollowUp = '';
+        $scope.user.ocFollowUpCalendar = '';
+        $scope.user.insurance = '';
+        $scope.user.outcomeOther = '';
+    }
+    
+    $scope.updateReferral = function(value){
+        $scope.resetReferrals();
+        $scope.user.referral = value;
     }
     
     $scope.updateChannel = function(value){
-        $scope.resetReferals();
+        $scope.resetReferrals();
         $scope.user.tv = value;
     }
     
     $scope.updateNewspaper = function(value){
-        $scope.resetReferals();
+        $scope.resetReferrals();
         $scope.user.newspaper = value;
     }
     
