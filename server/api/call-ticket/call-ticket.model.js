@@ -12,24 +12,25 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false
     },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    phoneNumber: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     callType: {
       type: DataTypes.ENUM,
       values: ['Change', 'Cancel', 'Billing', 'Other'],
       allowNull: false
     },
     callTypeOther: DataTypes.STRING,
+    doctorName: DataTypes.STRING,
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    insurance: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     outcome: {
       type: DataTypes.ENUM,
       values: ['Scheduled', 'Follow-Up', 'Insurance-Issue'],
@@ -37,21 +38,32 @@ export default function(sequelize, DataTypes) {
     },
     outcomeOther: DataTypes.STRING,
     ocFollowUp: DataTypes.DATE,
+    newspaper: DataTypes.STRING,
     notes: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    user: {
+    patientName: DataTypes.STRING,
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    referral: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    referal: {
+    referralOther: {
         type: DataTypes.STRING,
+        allowNull: false  
+    },
+    referralRequired: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
     },
     tv: DataTypes.STRING,
-    newspaper: DataTypes.STRING,
-    doctorName: DataTypes.STRING,
-    patientName: DataTypes.STRING
+    user: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
   });
 }
