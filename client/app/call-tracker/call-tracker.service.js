@@ -48,6 +48,7 @@ angular.module('oxhnApp')
                 callType: 'Change',
                 callTypeOther: '',
                 doctorName: '',
+                escalatedNotes: '',
                 firstName: '',
                 followupDate: '',
                 insurance: '',

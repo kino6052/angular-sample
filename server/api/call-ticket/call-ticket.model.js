@@ -19,6 +19,7 @@ export default function(sequelize, DataTypes) {
     },
     callTypeOther: DataTypes.STRING,
     doctorName: DataTypes.STRING,
+    escalatedNotes: DataTypes.STRING,
     firstName: {
       type: DataTypes.STRING,
       allowNull: false

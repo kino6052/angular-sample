@@ -102,6 +102,7 @@ angular.module('oxhnApp')
     }
     
     $scope.resetOutcome = function() {
+        $scope.user.escalatedNotes = '';
         $scope.user.followupDate = '';
         $scope.user.insurance = '';
         $scope.user.ocFollowUp = '2';
