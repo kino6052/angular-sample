@@ -14,7 +14,7 @@ export default function(sequelize, DataTypes) {
     },
     callType: {
       type: DataTypes.ENUM,
-      values: ['Change', 'Cancel', 'Billing', 'Other'],
+      values: ['New', 'Change', 'Cancel', 'Billing', 'Other'],
       allowNull: false
     },
     callTypeOther: DataTypes.STRING,
@@ -31,13 +31,18 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    location: {
+        type: DataTypes.ENUM,
+        values: ['Phoenix', 'Mesa', 'Sun City West', 'Tuscon', 'Lake Havasu City'],
+        allowNull: false
+    },
+    ocFollowUp: DataTypes.DATE,
     outcome: {
       type: DataTypes.ENUM,
-      values: ['Scheduled', 'Follow-Up', 'Insurance-Issue'],
+      values: ['Scheduled', 'Rescheduled', 'Followup', 'Insurance', 'Referral', 'Other'],
       allowNull: false
     },
     outcomeOther: DataTypes.STRING,
-    ocFollowUp: DataTypes.DATE,
     newspaper: DataTypes.STRING,
     notes: {
       type: DataTypes.STRING,

@@ -34,7 +34,7 @@ angular.module('oxhnApp')
     // Model 
     $scope.initiateUser = function(){
         $scope.user = $.extend({},CallTracker.user);        
-        $scope.callInitiated = moment().utc();
+        $scope.user.callInitiated = moment().utc();
     };
     $scope.initiateUser();
     $scope.user.user = $scope.getCurrentUser();
