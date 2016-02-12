@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('oxhnApp')
-  .controller('CallTrackerCtrl', function ($scope, $http, $timeout, CallTracker, Auth) {
+  .controller('CallTrackerCtrl', function ($scope, $http, $timeout, CallTracker, Modal, Auth) {
     // Calendar 
     $scope.users = [];
     $scope.role = 'user';
@@ -33,13 +33,11 @@ angular.module('oxhnApp')
     }
     // Model 
     $scope.initiateUser = function(){
-        var user = CallTracker.user;
-        user.user = $scope.getCurrentUser();
-        user.callInitiated = moment().utc();
-        $scope.user = user;
+        $scope.user = $.extend({},CallTracker.user);        
+        $scope.callInitiated = moment().utc();
     };
     $scope.initiateUser();
-    
+    $scope.user.user = $scope.getCurrentUser();
     // Resetting Forms
     $scope.$on('reset-call-type', function(){
     });
@@ -121,14 +119,24 @@ angular.module('oxhnApp')
         $scope.user.location = value;
     }
     
+    $scope.confirm = function(){
+        $scope.$broadcast('show-errors-check-validity');
+        
+        if ($scope.userForm.$invalid) { console.log("here"); return; }
+        
+        Modal.confirm.success("Check the Information for Correctness")(function(){
+            console.log("there");
+            $scope.save();
+        })
+    }
+    
     // Save User
     $scope.save = function() {
-        $scope.$broadcast('show-errors-check-validity');
-        if ($scope.userForm.$invalid) { return; }
         $scope.isVisible = false;
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
                 $scope.successSwitch();
+ 
                 $scope.initiateUser();
                 $scope.$broadcast('show-errors-reset');
                 $timeout(()=>{$scope.successSwitch(()=>{$scope.isVisible=true;})}, 2000);
@@ -140,7 +148,7 @@ angular.module('oxhnApp')
         );
     };
     
-    // Save User
+    // Get Data
     $scope.getData = function() {
         console.log($scope.getCurrentRole());
         

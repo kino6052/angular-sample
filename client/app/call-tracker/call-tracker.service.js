@@ -43,8 +43,7 @@ angular.module('oxhnApp')
         this.popup = {
             opened: false
         }
-        return {
-            user:  {
+        this.user = {
                 callInitiated: '',
                 callType: 'Change',
                 callTypeOther: '',
@@ -65,7 +64,9 @@ angular.module('oxhnApp')
                 referralOther: '',
                 tv: '',
                 user: ''
-            },
+            }
+        return {
+            user: this.user,
             getCurrentUser: this.getCurrentUser,
             today: this.today,
             clear: this.clear,

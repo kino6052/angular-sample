@@ -2,7 +2,7 @@
 
     img(src="{{googleImage.image.url}}")
     .alert.alert-success.animate-show(role="alert" ng-show="successSwitchState") Form Successfully Submitted!
-    div.row
+    div.row(style="z-index: 0")
         div.col-sm-6.col-sm-offset-3
             div.panel.panel-default 
                 div.panel-heading
@@ -207,4 +207,4 @@
                             p.help-block(ng-if='userForm.notes.$error.required') The comments are required
                             br
                         .button-group
-                            button.btn.btn-primary(ng-click='save()') Submit
+                            button.btn.btn-primary(ng-click='confirm()') Submit
