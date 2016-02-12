@@ -69,6 +69,55 @@ angular.module('oxhnApp')
           };
         },
         
+        verify(ver = angular.noop) {
+          /**
+           * Open a delete confirmation modal
+           * @param  {String} name   - name or info to show on modal
+           * @param  {All}           - any additional args are passed straight to del callback
+           */
+          return function() {
+            var args = Array.prototype.slice.call(arguments),
+                user = args.shift(),
+                callback = args.shift(),
+                verifyModal;
+
+            verifyModal = openModal({
+              modal: {
+                dismissable: true,
+                title: "Confirm the Infromation You've Entered is Correct",
+                html: ((user) => {
+                    var result = '<table class="table table-striped"><tbody>';
+                    for (var key in user){
+                        if (user.hasOwnProperty(key)){
+                            result += '<tr><td><strong>' + key + "</strong></td><td>" + user[key] + '</td></tr>'
+                        }
+                    }
+                    result += "</tbody></table>";
+                    return result;
+                    
+                })(user),
+                buttons: [{
+                  classes: 'btn-danger',
+                  text: 'Confirm',
+                  click: function(e) {
+                    verifyModal.close(e);
+                  }
+                }, {
+                  classes: 'btn-default',
+                  text: 'Cancel',
+                  click: function(e) {
+                    verifyModal.dismiss(e);
+                  }
+                }]
+              }
+            }, 'modal-success');
+
+            verifyModal.result.then(function(event) {
+                try {callback()} catch (error) {console.log(error)};
+            });
+          };
+        },
+        
         success(suc = angular.noop) {
           /**
            * Open a delete confirmation modal

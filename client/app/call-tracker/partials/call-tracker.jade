@@ -1,7 +1,5 @@
 .container-fluid
 
-    img(src="{{googleImage.image.url}}")
-    .alert.alert-success.animate-show(role="alert" ng-show="successSwitchState") Form Successfully Submitted!
     div.row(style="z-index: 0")
         div.col-sm-6.col-sm-offset-3
             div.panel.panel-default 
@@ -208,3 +206,5 @@
                             br
                         .button-group
                             button.btn.btn-primary(ng-click='confirm()') Submit
+    .alert.alert-success.animate-show(role="alert" ng-show="successSwitchState") Form Successfully Submitted!
+    .alert.alert-error.animate-show(role="alert" ng-show="failureSwitchState") Something Went Wrong...

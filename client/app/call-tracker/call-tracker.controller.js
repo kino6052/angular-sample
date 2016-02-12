@@ -54,6 +54,15 @@ angular.module('oxhnApp')
             console.log(err);
         }
     };
+    $scope.failureSwitchState=false;
+    $scope.failureSwitch=function(callback){
+        $scope.failureSwitchState=!$scope.failureSwitchState;
+        try {
+            callback();
+        } catch (err) {
+            console.log(err);
+        }
+    };
     
     $scope.click = function($event){
         angular.element(
@@ -122,10 +131,8 @@ angular.module('oxhnApp')
     $scope.confirm = function(){
         $scope.$broadcast('show-errors-check-validity');
         
-        if ($scope.userForm.$invalid) { console.log("here"); return; }
-        
-        Modal.confirm.success("Check the Information for Correctness")(function(){
-            console.log("there");
+        if ($scope.userForm.$invalid) { return; }
+        Modal.confirm.verify("Check the Information for Correctness")($scope.user, function(){
             $scope.save();
         })
     }
@@ -136,14 +143,13 @@ angular.module('oxhnApp')
         $http.post('/api/call-tickets', $scope.user).then(
             function(data){
                 $scope.successSwitch();
- 
                 $scope.initiateUser();
                 $scope.$broadcast('show-errors-reset');
                 $timeout(()=>{$scope.successSwitch(()=>{$scope.isVisible=true;})}, 2000);
             },
             function(error){
-                alert("Something Went Wrong...")
-                $scope.isVisible=true;
+                $scope.failureSwitch();
+                $timeout(()=>{$scope.failureSwitch(()=>{$scope.isVisible=true;})}, 2000);
             }
         );
     };
