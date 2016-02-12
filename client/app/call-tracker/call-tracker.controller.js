@@ -10,8 +10,9 @@ angular.module('oxhnApp')
             return Auth.getCurrentUser()._id;
         }
         catch (err)
-        {console.log(err)}
-        return '';
+        {return 0;}
+        return 0;
+        ;
     };
     $scope.getCurrentRole = function(){
         try {
@@ -21,7 +22,7 @@ angular.module('oxhnApp')
         {console.log(err)}
         return '';
     }
-
+    $scope.userId = $scope.getCurrentUser();
 
     $scope.CallTracker = CallTracker;
     $scope.setFollowupDate = function(value){
@@ -33,11 +34,12 @@ angular.module('oxhnApp')
     }
     // Model 
     $scope.initiateUser = function(){
-        $scope.user = $.extend({},CallTracker.user);        
+        $scope.user = $.extend({}, CallTracker.user);        
         $scope.user.callInitiated = moment().utc();
+        $scope.user.user = $scope.userId;
     };
     $scope.initiateUser();
-    $scope.user.user = $scope.getCurrentUser();
+
     // Resetting Forms
     $scope.$on('reset-call-type', function(){
     });
@@ -91,6 +93,8 @@ angular.module('oxhnApp')
     $scope.resetCallType = function() {
         $scope.user.doctorName = '';
         $scope.user.newspaper = '';
+        $scope.user.tv = '';
+        $scope.user.location = '';
         $scope.user.patientName = '';
         $scope.user.referral = '';
         $scope.user.referralOther = '';
@@ -101,7 +105,7 @@ angular.module('oxhnApp')
         $scope.user.followupDate = '';
         $scope.user.insurance = '';
         $scope.user.ocFollowUp = '2';
-        $scope.user.outcome = 'New';
+        $scope.user.outcome = 'Other';
         $scope.user.outcomeOther = '';
         $scope.user.referralRequired = false;
         $scope.user.location = '';
