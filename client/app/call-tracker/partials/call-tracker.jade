@@ -30,13 +30,13 @@
                             label.control-label How Can We Help?
                             br
                             div(class="btn-group")
-                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'New'" value="New" ng-click="updateForm('callType')") New Patient
-                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Change'" value="Change" ng-click="updateForm('callType')") Change
-                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Cancel'" value="Cancel" ng-click="updateForm('callType')") Cancel
-                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Billing'" value="Billing" ng-click="updateForm('callType')") Billing
-                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Other'" value="Other" ng-click="updateForm('callType')") Other
+                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'New'" value="New" ng-click="setCallType('New')") New Patient
+                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Change'" value="Change" ng-click="setCallType('Change')") Change
+                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Cancel'" value="Cancel" ng-click="setCallType('Cancel')") Cancel
+                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Billing'" value="Billing" ng-click="setCallType('Billing')") Billing
+                                label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Other'" value="Other" ng-click="setCallType('Other')") Other
                             br
-                        div(ng-class="animate-if" ng-if="user.callType==='New'")
+                        div#heard-from(ng-class="animate-if" ng-if="user.callType==='New'")
                             label.control-label How did You Hear about Us?
                             br
                             div.btn-group(uib-dropdown ng-init="user.referral='TV'")

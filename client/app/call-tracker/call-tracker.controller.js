@@ -4,7 +4,11 @@ angular.module('oxhnApp')
   .controller('CallTrackerCtrl', function ($scope, $http, $timeout, CallTracker, Modal, Auth) {
     // Calendar 
     $scope.users = [];
-    $scope.role = 'user';
+    
+    // GETTER METHODS
+    $scope.getPatient = function(){
+        return $scope.user;
+    }
     $scope.getCurrentUser = function(){
         try {
             return Auth.getCurrentUser()._id;
@@ -33,8 +37,11 @@ angular.module('oxhnApp')
         console.log(value.toUTCString());
     }
     // Model 
+    $scope.makeNewPatient = function(){
+        $scope.user = CallTracker.Patient();  
+    }
     $scope.initiateUser = function(){
-        $scope.user = $.extend({}, CallTracker.user);        
+        $scope.makeNewPatient();
         $scope.user.callInitiated = moment().utc();
         $scope.user.user = $scope.userId;
     };
@@ -84,6 +91,35 @@ angular.module('oxhnApp')
             default:
                 break;
         }  
+    }
+    
+    $scope.setCallType = function(key){
+        switch (key) {
+            case 'New':
+                $scope.resetCallType();
+                $scope.user.callType = 'New';
+                $scope.user.referral = 'TV';
+                $scope.user.tv = 'Ch. 5 CBS';
+                break;
+            case 'Change':
+                $scope.resetCallType();
+                $scope.user.callType = 'Change';
+                break;
+            case 'Cancel':
+                $scope.resetCallType();
+                $scope.user.callType = 'Cancel';
+                break;
+            case 'Billing':
+                $scope.resetCallType();
+                $scope.user.callType = 'Billing';
+                break;
+            case 'Other':
+                $scope.resetCallType();
+                $scope.user.callType = 'Other';
+                break;
+            default:
+                break;
+        }
     }
     
     

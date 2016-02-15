@@ -45,7 +45,7 @@ angular.module('oxhnApp')
         }
         this.user = {
                 callInitiated: '',
-                callType: 'Change',
+                callType: 'New',
                 callTypeOther: '',
                 doctorName: '',
                 escalatedNotes: '',
@@ -56,8 +56,8 @@ angular.module('oxhnApp')
                 location: '',
                 newspaper: '',
                 notes: '',
-                ocFollowUp: '2',
-                outcome: 'New',
+                ocFollowUp: '',
+                outcome: 'Other',
                 outcomeOther: '',
                 patientName: '',
                 phoneNumber: '',
@@ -67,6 +67,31 @@ angular.module('oxhnApp')
                 user: ''
             }
         return {
+            Patient: function(){
+                return {
+                    callInitiated: '',
+                    callType: 'New',
+                    callTypeOther: '',
+                    doctorName: '',
+                    escalatedNotes: '',
+                    firstName: '',
+                    followupDate: '',
+                    insurance: '',
+                    lastName: '',
+                    location: '',
+                    newspaper: '',
+                    notes: '',
+                    ocFollowUp: '',
+                    outcome: 'Other',
+                    outcomeOther: '',
+                    patientName: '',
+                    phoneNumber: '',
+                    referral: '',
+                    referralOther: '',
+                    tv: '',
+                    user: ''
+                }
+            },
             user: this.user,
             getCurrentUser: this.getCurrentUser,
             today: this.today,
