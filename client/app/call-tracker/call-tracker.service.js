@@ -92,6 +92,13 @@ angular.module('oxhnApp')
                     user: ''
                 }
             },
+            getOwnProperties: function(object, callback){
+                for (var property in object){
+                    if (object.hasOwnProperty(property)){
+                        callback(property);
+                    }
+                }  
+            },
             user: this.user,
             getCurrentUser: this.getCurrentUser,
             today: this.today,

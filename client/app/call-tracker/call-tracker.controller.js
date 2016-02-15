@@ -36,18 +36,23 @@ angular.module('oxhnApp')
                 $scope.user.callType = 'New';
                 $scope.user.referral = 'TV';
                 $scope.user.tv = 'Ch. 5 CBS';
+                $scope.user.outcome = 'Other';
                 break;
             case 'Change':
                 $scope.user.callType = 'Change';
+                $scope.user.outcome = 'Other';
                 break;
             case 'Cancel':
                 $scope.user.callType = 'Cancel';
+                $scope.user.outcome = 'Other';
                 break;
             case 'Billing':
                 $scope.user.callType = 'Billing';
+                $scope.user.outcome = 'Other';
                 break;
             case 'Other':
                 $scope.user.callType = 'Other';
+                $scope.user.outcome = 'Other';
                 break;
             default:
                 break;
@@ -64,6 +69,7 @@ angular.module('oxhnApp')
                 break;
             case 'Rescheduled':
                 $scope.user.outcome = 'Rescheduled';
+                $scope.user.location = 'Phoenix';
                 break;
             case 'Followup':
                 $scope.user.outcome = 'Followup';
@@ -158,25 +164,20 @@ angular.module('oxhnApp')
     
     
     $scope.resetCallType = function() {
-        $scope.user.doctorName = '';
-        $scope.user.newspaper = '';
-        $scope.user.tv = '';
-        $scope.user.location = '';
-        $scope.user.patientName = '';
-        $scope.user.referral = '';
-        $scope.user.referralOther = '';
-        $scope.resetOutcome();
+        $scope.user.callType = "New";
+        CallTracker.getOwnProperties($scope.user, function(property){
+            if ($.inArray(property, ['callInitiated', 'referralRequired', 'callType']) === -1){
+                $scope.user[property] = '';
+            }
+        });
     }
     
     $scope.resetOutcome = function() {
-        $scope.user.escalatedNotes = '';
-        $scope.user.followupDate = '';
-        $scope.user.insurance = '';
-        $scope.user.ocFollowUp = '';
-        $scope.user.outcome = 'Other';
-        $scope.user.outcomeOther = '';
-        $scope.user.referralRequired = false;
-        $scope.user.location = '';
+        CallTracker.getOwnProperties($scope.user, function(property){
+            if ($.inArray(property, ['callInitiated', 'referralRequired', 'callType']) === -1){
+                $scope.user[property] = '';
+            }
+        });
     }
     
     $scope.updateReferral = function(value){
