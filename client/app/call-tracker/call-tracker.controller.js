@@ -170,7 +170,17 @@ angular.module('oxhnApp')
 
         $scope.resetOutcome = function() {
             CallTracker.getOwnProperties($scope.user, function(property) {
-                if ($.inArray(property, ['callInitiated', 'referralRequired', 'callType', 'referral', 'tv', 'callTypeOther']) === -1) {
+                if ($.inArray(property, 
+                ['callInitiated', 
+                'referralRequired', 
+                'callType', 
+                'referral', 
+                'tv', 
+                'newspaper', 
+                'referralOther ', 
+                'doctorName', 
+                'patientName', 
+                'callTypeOther']) === -1) {
                     $scope.user[property] = '';
                 }
             });

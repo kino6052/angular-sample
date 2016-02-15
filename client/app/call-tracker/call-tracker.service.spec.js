@@ -85,6 +85,13 @@ describe('Controller: Call Tracker', function() {
             expect(getPatientHook().outcome).toEqual('Other');
         });
     });
+    describe('Should Assign Date', function() {
+        it('should have a default value for referral set to "TV"', function() {
+            modelInitializationHook = $scope.initiateUser;
+            modelInitializationHook();
+            expect(typeof(getPatientHook().callInitiated)).toBe('object');
+        });
+    });
     describe('New Patient is Selected', function() {
         it('should have a default value for referral set to "TV"', function() {
             modelInitializationHook();
@@ -160,10 +167,10 @@ describe('Controller: Call Tracker', function() {
                         expect(Patient[field]).toEqual("Followup");
                         break;
                     case 'referral':
-                        expect(Patient[field]).toEqual("");
+                        expect(Patient[field]).not.toEqual("");
                         break;
                     case 'tv':
-                        expect(Patient[field]).toEqual("");
+                        expect(Patient[field]).not.toEqual("");
                         break;
                     case 'followupDate':
                         expect(Patient[field]).toEqual("0");

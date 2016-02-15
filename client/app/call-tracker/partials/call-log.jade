@@ -42,9 +42,11 @@ html
                     p(ng-if="ticket.newspaper") {{ticket.newspaper}}
                     p(ng-if="ticket.doctorName") {{ticket.doctorName}}
                     p(ng-if="ticket.patientName") {{ticket.patientName}}
-                td(colspan="2") 
+                td(colspan="1") 
                     strong(ng-show="ticket.callTypeOther") Call Type (Other):
                     p(ng-show="ticket.callTypeOther") {{ticket.callTypeOther}}
-                td(colspan="2")
+                td(colspan="1")
                     strong(ng-show="ticket.callTypeOther") Outcome (Other):
                     p(ng-show="ticket.callTypeOther") {{ticket.outcomeOther}}
+                td(colspan="2")
+                    strong(ng-show="ticket.referralRequired") Referral Required: Yes;
