@@ -123,12 +123,12 @@
                             label.control-label What was the Result of the Call?
                             br
                             div(class="btn-group")
-                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Scheduled'" value="Scheduled" ng-click="updateForm('outcome')" ng-if="user.callType==='New'") Scheduled
-                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Rescheduled'" value="Rescheduled" ng-click="updateForm('outcome')" ng-if="user.callType==='Change'") Rescheduled
-                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Followup'" value="Followup" ng-click="updateForm('outcome')") Follow-up
-                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Insurance'" value="Insurance" ng-click="updateForm('outcome')" ng-if="user.callType!=='Billing'") Insurance
-                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Referral'" value="Referral" ng-click="updateForm('outcome')" ng-if="user.callType==='New'") Referral
-                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Other'" value="Other" ng-click="updateForm('outcome')"  ng-if="user.callType!=='Billing'") Other
+                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Scheduled'" value="Scheduled" ng-click="setOutcome('New')" ng-if="user.callType==='New'") Scheduled
+                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Rescheduled'" value="Rescheduled" ng-click="setOutcome('Change')" ng-if="user.callType==='Change'") Rescheduled
+                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Followup'" value="Followup" ng-click="setOutcome('Followup')") Follow-up
+                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Insurance'" value="Insurance" ng-click="setOutcome('Insurance')" ng-if="user.callType!=='Billing'") Insurance
+                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Referral'" value="Referral" ng-click="setOutcome('Referral')" ng-if="user.callType==='New'") Referral
+                                label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Other'" value="Other" ng-click="setOutcome('Other')"  ng-if="user.callType!=='Billing'") Other
                                 br
                             .form-group(ng-class="animate-if" ng-if="user.callType==='New' && user.outcome==='Scheduled'")
                                 label.control-label Referral Required?

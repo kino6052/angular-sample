@@ -26,6 +26,67 @@ angular.module('oxhnApp')
         {console.log(err)}
         return '';
     }
+    
+    // SETTER METHODS
+    
+    $scope.setCallType = function(key){
+        $scope.resetCallType();
+        switch (key) {
+            case 'New':
+                $scope.user.callType = 'New';
+                $scope.user.referral = 'TV';
+                $scope.user.tv = 'Ch. 5 CBS';
+                break;
+            case 'Change':
+                $scope.user.callType = 'Change';
+                break;
+            case 'Cancel':
+                $scope.user.callType = 'Cancel';
+                break;
+            case 'Billing':
+                $scope.user.callType = 'Billing';
+                break;
+            case 'Other':
+                $scope.user.callType = 'Other';
+                break;
+            default:
+                break;
+        }
+    }
+    
+    $scope.setOutcome = function(key){
+        $scope.resetOutcome();
+        switch (key) {
+            case 'Scheduled':
+                $scope.user.outcome = 'Scheduled';
+                $scope.user.referral = 'TV';
+                $scope.user.tv = 'Ch. 5 CBS';
+                break;
+            case 'Rescheduled':
+                $scope.user.outcome = 'Rescheduled';
+                break;
+            case 'Followup':
+                $scope.user.outcome = 'Followup';
+                $scope.user.followupDate = '0';
+                $scope.setFollowupDate($scope.user.followupDate);
+                break;
+            case 'Insurance':
+                $scope.user.outcome = 'Insurance';
+                break;
+            case 'Referral':
+                $scope.user.outcome = 'Referral';
+                break;
+            case 'Other':
+                $scope.user.outcome = 'Other';
+                break;    
+        
+            default:
+                break;
+        }
+    }
+    
+    
+    
     $scope.userId = $scope.getCurrentUser();
 
     $scope.CallTracker = CallTracker;
@@ -93,34 +154,7 @@ angular.module('oxhnApp')
         }  
     }
     
-    $scope.setCallType = function(key){
-        switch (key) {
-            case 'New':
-                $scope.resetCallType();
-                $scope.user.callType = 'New';
-                $scope.user.referral = 'TV';
-                $scope.user.tv = 'Ch. 5 CBS';
-                break;
-            case 'Change':
-                $scope.resetCallType();
-                $scope.user.callType = 'Change';
-                break;
-            case 'Cancel':
-                $scope.resetCallType();
-                $scope.user.callType = 'Cancel';
-                break;
-            case 'Billing':
-                $scope.resetCallType();
-                $scope.user.callType = 'Billing';
-                break;
-            case 'Other':
-                $scope.resetCallType();
-                $scope.user.callType = 'Other';
-                break;
-            default:
-                break;
-        }
-    }
+
     
     
     $scope.resetCallType = function() {
@@ -138,7 +172,7 @@ angular.module('oxhnApp')
         $scope.user.escalatedNotes = '';
         $scope.user.followupDate = '';
         $scope.user.insurance = '';
-        $scope.user.ocFollowUp = '2';
+        $scope.user.ocFollowUp = '';
         $scope.user.outcome = 'Other';
         $scope.user.outcomeOther = '';
         $scope.user.referralRequired = false;
