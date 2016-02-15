@@ -41,10 +41,7 @@ angular.module('oxhnApp')
     $scope.initiateUser();
 
     // Resetting Forms
-    $scope.$on('reset-call-type', function(){
-    });
-    $scope.$on('reset-outcome', function(){
-    });
+   
     // Form Properties
     $scope.isVisible=true;
     $scope.successSwitchState=false;

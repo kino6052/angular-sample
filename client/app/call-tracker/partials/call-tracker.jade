@@ -36,7 +36,7 @@
                                 label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Billing'" value="Billing" ng-click="updateForm('callType')") Billing
                                 label(class="btn btn-primary" ng-model="user.callType"  btn-radio="'Other'" value="Other" ng-click="updateForm('callType')") Other
                             br
-                        div(ng-if="user.callType==='New'")
+                        div(ng-class="animate-if" ng-if="user.callType==='New'")
                             label.control-label How did You Hear about Us?
                             br
                             div.btn-group(uib-dropdown ng-init="user.referral='TV'")
@@ -59,7 +59,7 @@
                             
                             
                             br
-                        div(ng-if="user.referral==='TV'")
+                        div(ng-class="animate-if" ng-if="user.referral==='TV'")
                             br
                             label.control-label What Channel?
                             br
@@ -81,7 +81,7 @@
                                         a(ng-click="updateChannel('Unknown')") Unknown
                             br   
                         
-                        .form-group(ng-if="user.referral==='Newspaper'")
+                        .form-group(class="animate-if" ng-if="user.referral==='Newspaper'")
                             br
                             label.control-label What Newspaper?
                             br
@@ -101,11 +101,11 @@
                             label.control-label What is the Doctor's Name?
                             br
                             .input-group   
-                                input.form-control(type='text', name='doctorName', ng-model='user.doctorName', required='', placeholder="Doctor's Name")      
+                                input.form-control(ng-class="animate-if" type='text', name='doctorName', ng-model='user.doctorName', required='', placeholder="Doctor's Name")      
                             p.help-block(ng-if='userForm.doctorName.$error.required') This field is Required
                             br  
                         
-                        .form-group(show-errors='show-errors' ng-if="user.referral==='Patient'")
+                        .form-group(ng-class="animate-if" show-errors='show-errors' ng-if="user.referral==='Patient'")
                             label.control-label What is the Patient's Name?
                             br
                             .input-group   
@@ -113,7 +113,7 @@
                             p.help-block(ng-if='userForm.patientName.$error.required') This field is Required
                             br 
                         
-                        .form-group(show-errors='show-errors', ng-if="user.callType==='Other'") 
+                        .form-group(ng-class="animate-if" show-errors='show-errors', ng-if="user.callType==='Other'") 
                             label.control-label Other
                             textarea.form-control(rows='5', ng-model='user.callTypeOther', name='other', placeholder='How can we help?', required)
                             p.help-block(ng-if='userForm.other.$error.required') This field is required
@@ -130,13 +130,13 @@
                                 label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Referral'" value="Referral" ng-click="updateForm('outcome')" ng-if="user.callType==='New'") Referral
                                 label(class="btn btn-primary" ng-model="user.outcome"  btn-radio="'Other'" value="Other" ng-click="updateForm('outcome')"  ng-if="user.callType!=='Billing'") Other
                                 br
-                            .form-group(ng-if="user.callType==='New' && user.outcome==='Scheduled'")
+                            .form-group(ng-class="animate-if" ng-if="user.callType==='New' && user.outcome==='Scheduled'")
                                 label.control-label Referral Required?
                                 br
                                 div(class="btn-group")
                                     label(class="btn btn-primary" ng-model="user.referralRequired"  btn-radio="true" value="true") Yes
                                     label(class="btn btn-primary" ng-model="user.referralRequired"  btn-radio="false" value="false") No
-                            .form-group(show-errors='show-errors' ng-if="user.referralRequired===true")
+                            .form-group(ng-class="animate-if" show-errors='show-errors' ng-if="user.referralRequired===true")
                                 label.control-label Provide Doctor's Information
                                 br
                                 .input-group   
@@ -144,7 +144,7 @@
                                 p.help-block(ng-if='userForm.doctorReferral.$error.required') This field is Required
                                 br 
                                 
-                            div(ng-if="user.outcome==='Scheduled' || user.outcome==='Rescheduled'")
+                            div(ng-class="animate-if" ng-if="user.outcome==='Scheduled' || user.outcome==='Rescheduled'")
                                 br
                                 label.control-label What Location?
                                 br
@@ -164,7 +164,7 @@
                                             a(ng-click="updateLocation('Lake Havasu City')") Lake Havasu City                           
                                 br
                                 
-                            div(ng-if="user.outcome==='Followup'")
+                            div(ng-class="animate-if" ng-if="user.outcome==='Followup'")
                                 br
                                 div(class="btn-group")
                                     label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'0'" value="0" ng-click="setFollowupDate('0')") Immediate (Escalated)
@@ -173,12 +173,12 @@
                                     label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'7'" value="7" ng-click="setFollowupDate('7')") 7 Days
                                     label(class="btn btn-primary" ng-model="user.followupDate"  btn-radio="'10'" value="'10'") Other
                                 br
-                            .form-group(show-errors='show-errors' ng-if="user.followupDate==='0'")
+                            .form-group(ng-class="animate-if" show-errors='show-errors' ng-if="user.followupDate==='0'")
                                 br  
                                 label.control-label Notes (Escalated)    
                                 textarea.form-control(rows='5',  ng-model='user.escalatedNotes', name='escalatedNotes', placeholder='Please, Provide Explanation of the Issue', required='')
                                 p.help-block(ng-if='userForm.escalatedNotes.$error.required') This field is required
-                            div.row(ng-if="user.followupDate==='10'")
+                            div.row(ng-class="animate-if" ng-if="user.followupDate==='10'")
                                 br
                                 div.col-xs-2
                                     p.input-group
@@ -187,12 +187,12 @@
                                             button(type="button" class="btn btn-default" ng-click="CallTracker.open()")
                                                 i.glyphicon.glyphicon-calendar
                                 br
-                            .form-group(show-errors='show-errors' ng-if="user.outcome==='Insurance'")
+                            .form-group(ng-class="animate-if" show-errors='show-errors' ng-if="user.outcome==='Insurance'")
                                 br  
                                 label.control-label Insurance Issue    
                                 textarea.form-control(rows='5',  ng-model='user.insurance', name='insurance', placeholder='Please, Provide Explanation of the Issue', required='')
                                 p.help-block(ng-if='userForm.insurance.$error.required') This field is required
-                            .form-group(show-errors='show-errors', ng-if="user.outcome==='Other'")
+                            .form-group.animate-if(ng-class="animate-if" show-errors='show-errors', ng-if="user.outcome==='Other'")
                                 br 
                                 label.control-label Other
                                 textarea.form-control(rows='5', ng-model='user.outcomeOther', name='outcomeOther', placeholder='Please, Provide Information', required)

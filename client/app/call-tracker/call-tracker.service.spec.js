@@ -1,19 +1,18 @@
 'use strict';
 
 describe('Service: CallTracker', function () {
-
-  // load the controller's module
-  beforeEach(module('oxhnApp'));
-
-  var CallTrackerCtrl, scope;
-
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, callTracker) {
-    scope = $rootScope.$new();
-    CallTrackerCtrl = $controller('CallTrackerCtrl', {
-      $scope: scope
+    var $scope;
+    var $location;
+    
+    beforeEach(module('oxhnApp'));
+    
+    beforeEach(inject(function(_$controller_){
+        $scope = {};
+        _$controller_('CallTrackerCtrl', {$scope: $scope});
+    }));
+    it('should redirect to the query', function() {
+        expect($scope.role).toBe('user');
     });
-  }));
 /*
   it('Should Return User Name', function () {
     //var currentUser = callTrackerCtrl.getCurrentUser();
