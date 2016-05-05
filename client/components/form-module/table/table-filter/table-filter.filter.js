@@ -1,3 +1,5 @@
+'use strict'
+
 angular.module('form.module').filter('tableFilter', function() {
   return function(input) {
     switch (input) {
