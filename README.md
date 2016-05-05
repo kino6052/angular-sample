@@ -1,5 +1,8 @@
 # oxhn
 
+This is a dashboard created with the MEAN stack generator.
+My work was on both ends. On the front-end I had to setup the router, login, controllers and views.
+
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.3.0-beta.0.
 
 ## Getting Started
